@@ -5,8 +5,14 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps_11.Users
 {
-    public class ProductOwner
+<<<<<<< HEAD
+    public class Developer : User
     {
 
+=======
+    public class ProductOwner : User
+    {
+        
+>>>>>>> 256d69a6f471065d64ce7072ef085d423858d0a4
     }
 }

@@ -7,6 +7,12 @@ namespace AvansDevOps_11.ItemStates
 {
     public interface IItemState
     {
-        
+        public void Start();
+        public void Finish();
+        public void Test();
+        public void FinishTest();
+        public void Redo();
+        public void Retest();
+        public void Done();
     }
 }

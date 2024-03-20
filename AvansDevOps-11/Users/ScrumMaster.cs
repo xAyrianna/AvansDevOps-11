@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps_11.Users
 {
-    public class ScrumMaster
+    public class ScrumMaster : User
     {
 
     }
