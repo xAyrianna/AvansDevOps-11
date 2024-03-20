@@ -5,26 +5,27 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps_11.SprintStates
 {
-    public class ReleaseErrorSprintState : ISprintState
+    public class PipelineErrorSprintState : ISprintState
     {
         private Sprint Sprint;
-        public ReleaseErrorSprintState(Sprint sprint)
+        public PipelineErrorSprintState(Sprint sprint)
         {
             this.Sprint = sprint;
         }
         public void Start()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Sprint has already finished.");
         }
 
         public void Cancel()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Canceling sprint.");
+            Sprint.SprintState = new CanceledSprintState(Sprint);
         }
 
         public void Close()
         {
-            throw new NotImplementedException();
+            
         }
 
         public void Finish()

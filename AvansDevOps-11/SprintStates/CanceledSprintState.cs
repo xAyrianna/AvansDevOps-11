@@ -40,7 +40,7 @@ namespace AvansDevOps_11.SprintStates
         public void FinishPipeline()
         {
             Console.WriteLine("There is no pipeline in progress.");
-        }   
+        }
 
         public void PipelineError()
         {
