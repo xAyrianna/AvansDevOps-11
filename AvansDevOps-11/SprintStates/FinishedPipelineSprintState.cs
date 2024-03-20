@@ -5,55 +5,46 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps_11.SprintStates
 {
-    public class FinishedSprintState : ISprintState
+    public class FinishedPipelineSprintState : ISprintState
     {
         private Sprint Sprint;
-        public FinishedSprintState(Sprint sprint)
+        public FinishedPipelineSprintState(Sprint sprint)
         {
             this.Sprint = sprint;
         }
         public void Start()
         {
-            Console.WriteLine("Sprint is already finished.");
+            throw new NotImplementedException();
         }
 
         public void Cancel()
         {
-            Console.WriteLine("Canceling sprint.");
-            Sprint.SprintState = new CanceledSprintState(Sprint);
+            throw new NotImplementedException();
         }
 
         public void Close()
         {
-            Console.WriteLine("Sprint cannot be closed yet.");
+            throw new NotImplementedException();
         }
 
         public void Finish()
         {
-            Console.WriteLine("Sprint has already finished.");
+            throw new NotImplementedException();
         }
 
         public void StartPipeline()
         {
-            if (Sprint.Pipeline != null)
-            {
-                Console.WriteLine("Starting developoment pipeline.");
-                Sprint.SprintState = new RunningPipelineSprintState(Sprint);
-            }
-            else
-            {
-                Console.WriteLine("Sprint has no pipeline.");
-            }
+            throw new NotImplementedException();
         }
 
         public void FinishPipeline()
         {
-            Console.WriteLine("There is no pipeline in progress.");
+            throw new NotImplementedException();
         }
 
         public void PipelineError()
         {
-            Console.WriteLine("Sprint is not releasing.");
+            throw new NotImplementedException();
         }
 
         public void Review()
@@ -65,6 +56,8 @@ namespace AvansDevOps_11.SprintStates
             }
             Console.WriteLine("Sprint cannot be reviewed.");
         }
+    }
+    {
         
     }
 }

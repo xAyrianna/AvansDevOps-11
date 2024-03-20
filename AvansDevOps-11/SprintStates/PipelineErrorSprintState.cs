@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps_11.SprintStates
 {
-    public class ReviewedSprintState : ISprintState
+    public class ReleaseErrorSprintState : ISprintState
     {
         private Sprint Sprint;
-        public ReviewedSprintState(Sprint sprint)
+        public ReleaseErrorSprintState(Sprint sprint)
         {
             this.Sprint = sprint;
         }
