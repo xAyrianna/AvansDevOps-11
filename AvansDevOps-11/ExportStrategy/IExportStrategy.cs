@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AvansDevOps_11
+namespace AvansDevOps_11.ExportStrategy
 {
-    public class PipelineComposite
+    public interface IExportStrategy
     {
         
     }
