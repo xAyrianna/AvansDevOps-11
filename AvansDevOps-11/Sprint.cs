@@ -21,6 +21,7 @@ namespace AvansDevOps_11
         public Document? ReviewSummary { get; set; }
 
         public NotificationEvent NotificationEvent { get; set; }
+        public string Name { get; set; }
 
         public Sprint(Project project, ScrumMaster scrumMaster)
         {
