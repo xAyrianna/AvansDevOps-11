@@ -10,7 +10,10 @@ namespace AvansDevOps_11.NotificationAdapterStrategy
     {
         public void SendNotification(List<User> users, string msg, string subject)
         {
-            throw new NotImplementedException();
+            foreach (var user in users)
+            {
+                Console.WriteLine($"Sending email to {user.Email}. \nSubject: {subject}, \n{msg}");
+            }
         }
     }
 
