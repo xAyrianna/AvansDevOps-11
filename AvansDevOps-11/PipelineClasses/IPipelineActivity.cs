@@ -7,6 +7,6 @@ namespace AvansDevOps_11.PipelineClasses
 {
     public interface IPipelineActivity
     {
-        
+        public void Accept(PipelineVisitor visitor);
     }
 }

@@ -10,6 +10,7 @@ namespace AvansDevOps_11.PipelineClasses
     {
         public Sprint Sprint { get; set; }
         public IPipelineState State { get; set; }
+        public List<IPipelineActivity> Activities = new List<IPipelineActivity>();
 
         public Pipeline(Sprint sprint)
         {
@@ -17,5 +18,13 @@ namespace AvansDevOps_11.PipelineClasses
             Sprint = sprint;
         }
 
+        public void Accept(PipelineVisitor visitor)
+        {
+            visitor.Visit(this);
+            foreach (var activity in Activities)
+            {
+                activity.Accept(visitor);
+            }
+        }
     }
 }
