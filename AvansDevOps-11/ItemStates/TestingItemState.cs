@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AvansDevOps_11.Users;
 
 namespace AvansDevOps_11.ItemStates
 {
@@ -35,6 +36,8 @@ namespace AvansDevOps_11.ItemStates
         {
             Console.WriteLine("Moving item back to 'ToDo'");
             this._item.ItemState = new ToDoItemState(this._item);
+            List<User> ToBeNotified = new List<User> {this._item.Sprint.ScrumMaster};
+            this._item.Sprint.NotificationEvent.Notify(ToBeNotified, $"Item {this._item.Title} failed testing and has been moved back to 'ToDo'", "Item moved back to 'ToDo'");
         }
         public void Retest()
         {

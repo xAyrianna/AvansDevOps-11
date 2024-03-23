@@ -9,7 +9,7 @@ namespace AvansDevOps_11.ExportStrategy
     {
         public void Export(Report report)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Exporting report to PDF.");
         }
     }
 }

@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps_11.Users
 {
-    public class Tester : User
+    public class Tester(string Name, string slackUsername) : User(Name, slackUsername)
     {
-        
     }
 }

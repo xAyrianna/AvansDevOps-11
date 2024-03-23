@@ -9,12 +9,12 @@ namespace AvansDevOps_11
     public class ThreadReaction
     {
         public User User;
-        public string Reaction;
+        public string ReactionText;
 
         public ThreadReaction(User user, string reaction)
         {
             this.User = user;
-            this.Reaction = reaction;
+            this.ReactionText = reaction;
         }
     }
 }

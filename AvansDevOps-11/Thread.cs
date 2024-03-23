@@ -9,29 +9,27 @@ namespace AvansDevOps_11
 {
     public class Thread
     {
+        public User ThreadOwner;
+        public string Subject { get; set; }
+        public string? Description { get; set; }
         HashSet<User> UsersInThread = new();
         List<ThreadReaction> Reactions = new();
-        NotificationEvent NotificationEvent = new();
+        BacklogItem BacklogItem;
 
-        public void AddUser(User user)
+        public Thread(BacklogItem backlogItem, User user, string subject, string? description = null)
         {
+            BacklogItem = backlogItem;
+            ThreadOwner = user;
             UsersInThread.Add(user);
-        }
-
-        public void RemoveUser(User user)
-        {
-            UsersInThread.Remove(user);
+            Subject = subject;
+            Description = description;
         }
 
         public void AddReaction(ThreadReaction reaction)
         {
             Reactions.Add(reaction);
-            NotificationEvent.Notify(UsersInThread.ToList(), $"Reaction added to thread", "Reaction added");
-        }
-
-        public void RemoveReaction(ThreadReaction reaction)
-        {
-            Reactions.Remove(reaction);
+            UsersInThread.Add(reaction.User);
+            BacklogItem.Sprint.NotificationEvent.Notify(UsersInThread.ToList(), $"Reaction added to thread", "Reaction added");
         }
         
     }

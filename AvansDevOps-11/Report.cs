@@ -10,25 +10,11 @@ namespace AvansDevOps_11
     public class Report
     {
         List<IExportStrategy> ExportStrategies = new();
+        public string ReportText { get; set; }
 
-        public void AddHeader()
+        public Report(string report)
         {
-            // Add header
-        }
-
-        public void AddFooter()
-        {
-            // Add footer
-        }
-
-        public void AddTeam()
-        {
-            // Add team
-        }
-
-        public void AddBurndownChart()
-        {
-            // Add burndown chart
+            ReportText = report;
         }
 
         public void AddExportStrategy(IExportStrategy exportStrategy)

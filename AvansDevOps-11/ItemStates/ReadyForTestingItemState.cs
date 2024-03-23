@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AvansDevOps_11.Users;
 
 namespace AvansDevOps_11.ItemStates
 {
@@ -12,6 +13,8 @@ namespace AvansDevOps_11.ItemStates
         public ReadyForTestingItemState(BacklogItem item)
         {
             this._item = item;
+            List<User> testers = item.Sprint.Testers.Cast<User>().ToList();
+            item.Sprint.NotificationEvent.Notify(testers, $"Item {item.Title} is ready for testing", "Item ready for testing");
         }
 
         public void Start()

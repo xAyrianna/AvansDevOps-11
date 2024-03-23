@@ -18,6 +18,7 @@ namespace AvansDevOps_11
         public DateTime EndDate { get { return EndDate; } set { if (State is CreatedSprintState) { EndDate = value; } else { Console.WriteLine("Can no longer change end date."); } } }
         public List<BacklogItem> BacklogItems = new();
         public List<Developer> Developers = new();
+        public List<Tester> Testers = new();
         public ScrumMaster ScrumMaster;
         public ISprintState State { get; set; }
         public Pipeline? Pipeline { get; set; }
@@ -79,6 +80,16 @@ namespace AvansDevOps_11
         public void RemoveDeveloper(Developer developer)
         {
             Developers.Remove(developer);
+        }
+
+        public int GetTotalStoryPoints()
+        {
+            int totalStoryPoints = 0;
+            foreach (var backlogItem in BacklogItems)
+            {
+                totalStoryPoints += backlogItem.StoryPoints;
+            }
+            return totalStoryPoints;
         }
     }
 }

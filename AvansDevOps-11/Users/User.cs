@@ -8,9 +8,16 @@ namespace AvansDevOps_11.Users
     public abstract class User
     {
         public string Name { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Email { get; set; }
         public string SlackUsername { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? Email { get; set; }
+
+
+        public User(string name, string slackUsername)
+        {
+            Name = name;
+            SlackUsername = slackUsername;
+        }
 
     }
 }
