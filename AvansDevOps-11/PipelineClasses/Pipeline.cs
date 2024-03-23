@@ -1,3 +1,4 @@
+using AvansDevOps_11.NotifactionAdapterStrategy;
 using AvansDevOps_11.PipelineClasses.PipelineStates;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,13 @@ namespace AvansDevOps_11.PipelineClasses
 {
     public class Pipeline
     {
+        public Sprint Sprint { get; set; }
         public IPipelineState State { get; set; }
 
-        public Pipeline()
+        public Pipeline(Sprint sprint)
         {
             State = new CreatedPipelineState(this);
+            Sprint = sprint;
         }
 
     }

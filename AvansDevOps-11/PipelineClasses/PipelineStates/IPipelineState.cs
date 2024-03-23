@@ -11,5 +11,6 @@ namespace AvansDevOps_11.PipelineClasses.PipelineStates
         public void Start();
         public void Finish();
         public void Error();
+        public void Restart();
     }
 }

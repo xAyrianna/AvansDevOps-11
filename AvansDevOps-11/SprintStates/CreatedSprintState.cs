@@ -15,7 +15,7 @@ namespace AvansDevOps_11.SprintStates
         public void Start()
         {
             Console.WriteLine("Starting sprint.");
-            _sprint.SprintState = new InProgressSprintState(_sprint);
+            _sprint.State = new InProgressSprintState(_sprint);
         }
         public void Cancel()
         {

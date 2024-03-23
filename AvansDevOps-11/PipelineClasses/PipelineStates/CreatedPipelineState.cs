@@ -8,14 +8,14 @@ namespace AvansDevOps_11.PipelineClasses.PipelineStates
 {
     public class CreatedPipelineState: IPipelineState
     {
-        private Pipeline Pipeline;
+        private Pipeline _pipeline;
         public CreatedPipelineState(Pipeline pipeline) { 
-            this.Pipeline = pipeline;
+            this._pipeline = pipeline;
         }
         public void Start()
         {
             Console.WriteLine("Starting pipeline execution.");
-            this.Pipeline.State = new RunningPipelineState(this.Pipeline);
+            this._pipeline.State = new RunningPipelineState(this._pipeline);
         }
 
         public void Finish()
@@ -27,7 +27,10 @@ namespace AvansDevOps_11.PipelineClasses.PipelineStates
         {
             Console.WriteLine("State transition not allowed; pipeline has not started yet and cannot have an error.");
         }
+
+        public void Restart()
+        {
+            Console.WriteLine("State transition not allowed; pipeline has not started yet and cannot be restarted.");
+        }
     }   
-    {
-    }
 }

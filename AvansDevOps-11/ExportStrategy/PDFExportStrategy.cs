@@ -5,8 +5,11 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps_11.ExportStrategy
 {
-    public class PDFExportStrategy
+    public class PDFExportStrategy : IExportStrategy
     {
-        
+        public void Export(Report report)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

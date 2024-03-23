@@ -13,7 +13,7 @@ namespace AvansDevOps_11.PipelineClasses.PipelineStates
         public FinishedPipelineState(Pipeline pipeline)
         {
             _pipeline = pipeline;
-            // event: pipeline finished, needs to call sprint.state.finishpipeline (changed review & close to one function)
+            _pipeline.Sprint.State.FinishPipeline();
         }
 
         public void Start()
@@ -27,6 +27,11 @@ namespace AvansDevOps_11.PipelineClasses.PipelineStates
         }
 
         public void Error()
+        {
+            Console.WriteLine("State transition not allowed; pipeline has finished.");
+        }
+
+        public void Restart()
         {
             Console.WriteLine("State transition not allowed; pipeline has finished.");
         }

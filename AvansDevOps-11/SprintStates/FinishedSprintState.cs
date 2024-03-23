@@ -20,7 +20,7 @@ namespace AvansDevOps_11.SprintStates
         public void Cancel()
         {
             Console.WriteLine("Canceling sprint.");
-            _sprint.SprintState = new CanceledSprintState();
+            _sprint.State = new CanceledSprintState(this._sprint, "Results of the sprint are unsatisfactory.");
         }
 
         public void Finish()
@@ -34,17 +34,17 @@ namespace AvansDevOps_11.SprintStates
             if (_sprint.Pipeline != null)
             {
                 Console.WriteLine("Starting developoment pipeline.");
-                _sprint.SprintState = new RunningPipelineSprintState(_sprint);
+                _sprint.State = new RunningPipelineSprintState(_sprint);
             }
             else if (_sprint.Review)
             {
                 Console.WriteLine("Starting sprint review.");
-                _sprint.SprintState = new InReviewSprintState(_sprint);
+                _sprint.State = new InReviewSprintState(_sprint);
             }
             else
             {
                 Console.WriteLine("Closing sprint.");
-                _sprint.SprintState = new ClosedSprintState();
+                _sprint.State = new ClosedSprintState(_sprint);
             }
         }
 

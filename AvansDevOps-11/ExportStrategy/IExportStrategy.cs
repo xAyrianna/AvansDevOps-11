@@ -7,6 +7,6 @@ namespace AvansDevOps_11.ExportStrategy
 {
     public interface IExportStrategy
     {
-        
+        public void Export(Report report);
     }
 }

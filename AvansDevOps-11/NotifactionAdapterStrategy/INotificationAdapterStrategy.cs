@@ -1,3 +1,4 @@
+using AvansDevOps_11.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,6 @@ namespace AvansDevOps_11.NotifactionAdapterStrategy
 {
     public interface INotificationAdapterStrategy
     {
-        
+        public void SendNotification(List<User> users, String msg, String subject);
     }
 }

@@ -25,7 +25,7 @@ namespace AvansDevOps_11.SprintStates
         public void Finish()
         {
             Console.WriteLine("Finishing sprint.");
-            _sprint.SprintState = new FinishedSprintState(_sprint);
+            _sprint.State = new FinishedSprintState(_sprint);
         }
 
         public void Approve()

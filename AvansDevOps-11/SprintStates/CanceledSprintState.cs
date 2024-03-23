@@ -1,3 +1,4 @@
+using AvansDevOps_11.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,18 @@ namespace AvansDevOps_11.SprintStates
 {
     public class CanceledSprintState : ISprintState
     {
+        private Sprint _sprint;
+        public CanceledSprintState(Sprint sprint, String reason)
+        {
+            _sprint = sprint;
+            List<User> ToBeNotified = new List<User>()
+            {
+                _sprint.ScrumMaster, 
+                _sprint.Project.ProductOwner
+            };
+            _sprint.NotificationEvent.Notify(ToBeNotified, $"{reason} \nSprint has been canceled.", "Sprint Canceled");
+        }
+
         public void Start()
         {
             Console.WriteLine("State transition not allowed; sprint is canceled.");

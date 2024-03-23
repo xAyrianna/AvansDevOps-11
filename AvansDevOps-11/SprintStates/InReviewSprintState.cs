@@ -42,7 +42,7 @@ namespace AvansDevOps_11.SprintStates
             if (_sprint.ReviewSummary != null)
             {
                 Console.WriteLine("Closing sprint.");
-                _sprint.SprintState = new ClosedSprintState();
+                _sprint.State = new ClosedSprintState(_sprint);
             }
             else
             {

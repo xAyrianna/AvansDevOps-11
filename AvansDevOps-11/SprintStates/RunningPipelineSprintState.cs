@@ -23,7 +23,7 @@ namespace AvansDevOps_11.SprintStates
             if ((_sprint.Pipeline != null) && (_sprint.Pipeline.State.GetType() == typeof(PipelineErrorState)))
             {
                 Console.WriteLine("Canceling sprint.");
-                _sprint.SprintState = new CanceledSprintState();
+                _sprint.State = new CanceledSprintState(_sprint, "Pipeline did not run succesfully.");
             }
             else
             {
@@ -48,12 +48,12 @@ namespace AvansDevOps_11.SprintStates
                 if (_sprint.Review)
                 {
                     Console.WriteLine("Starting sprint review process");
-                    _sprint.SprintState = new InReviewSprintState(_sprint);
+                    _sprint.State = new InReviewSprintState(_sprint);
                 }
                 else
                 {
                     Console.WriteLine("Closing sprint.");
-                    _sprint.SprintState = new ClosedSprintState();
+                    _sprint.State = new ClosedSprintState(_sprint);
                 }   
             }
         }

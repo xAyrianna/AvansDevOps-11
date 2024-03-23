@@ -8,26 +8,32 @@ namespace AvansDevOps_11.PipelineClasses.PipelineStates
 {
     public class RunningPipelineState: IPipelineState
     {
-        private Pipeline Pipeline;
+        private Pipeline _pipeline;
         public RunningPipelineState(Pipeline pipeline)
         {
-            this.Pipeline = pipeline;
+            this._pipeline = pipeline;
+        }
+
+        public void Start()
+        {
+            Console.WriteLine("State transition not allowed; pipeline is already running.");
         }
 
         public void Error()
         {
             Console.WriteLine("An error occurred during pipeline execution.");
-            this.Pipeline.State = new PipelineErrorState(this.Pipeline);
+            this._pipeline.State = new PipelineErrorState(this._pipeline);
         }
 
         public void Finish()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Finishing pipeline execution.");
+            this._pipeline.State = new FinishedPipelineState(this._pipeline);
         }
 
-        public void Start()
+        public void Restart()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("State transition not allowed; pipeline is running.");
         }
     }
 }
