@@ -1,6 +1,6 @@
-using AvansDevOps_11.NotificationAdapterStrategy;
-using AvansDevOps_11.PipelineClasses;
-using AvansDevOps_11.SprintStates;
+using AvansDevOps_11.Adapters.NotificationAdapter;
+using AvansDevOps_11.Events;
+using AvansDevOps_11.States.SprintStates;
 using AvansDevOps_11.Users;
 using System;
 using System.Collections.Generic;
@@ -35,15 +35,15 @@ namespace AvansDevOps_11
             State = new CreatedSprintState(this);
 
             NotificationEvent = new NotificationEvent();
-            NotificationEvent.Subscribe(new SlackAdapterStrategy());
+            NotificationEvent.Subscribe(new SlackAdapter());
         }
 
-        public void AddNotificationStrategy(INotificationAdapterStrategy strategy)
+        public void AddNotificationStrategy(INotificationAdapter strategy)
         {
             NotificationEvent.Subscribe(strategy);
         }
 
-        public void RemoveNotificationStrategy(INotificationAdapterStrategy strategy)
+        public void RemoveNotificationStrategy(INotificationAdapter strategy)
         {
             NotificationEvent.Unsubscribe(strategy);
         }

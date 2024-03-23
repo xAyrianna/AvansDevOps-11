@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
-using AvansDevOps_11.ItemStates;
+using AvansDevOps_11.States.ItemStates;
 using AvansDevOps_11.Users;
 
 namespace AvansDevOps_11
