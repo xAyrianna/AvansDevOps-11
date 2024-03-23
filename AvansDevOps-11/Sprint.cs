@@ -1,4 +1,4 @@
-using AvansDevOps_11.NotifactionAdapterStrategy;
+using AvansDevOps_11.NotificationAdapterStrategy;
 using AvansDevOps_11.PipelineClasses;
 using AvansDevOps_11.SprintStates;
 using AvansDevOps_11.Users;
@@ -33,6 +33,5 @@ namespace AvansDevOps_11
             NotificationEvent.Subscribe(new SMSAdapterStrategy());
             NotificationEvent.Subscribe(new SlackAdapterStrategy());
         }
-        
     }
 }

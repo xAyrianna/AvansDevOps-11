@@ -8,7 +8,7 @@ namespace AvansDevOps_11
 {
     public class Project
     {
-        public ProductOwner ProductOwner
+        public ProductOwner ProductOwner;
 
         public Project(ProductOwner productOwner)
         {
