@@ -8,44 +8,33 @@ namespace AvansDevOps_11.SprintStates
 {
     public class ClosedSprintState : ISprintState
     {
-        public void Cancel()
+        public void Start()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("State transition not allowed; sprint is closed.");
         }
-
-        public void Close()
-        {
-            throw new NotImplementedException();
-        }
-
         public void Finish()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("State transition not allowed; sprint is closed.");
+        }
+
+        public void Cancel()
+        {
+            Console.WriteLine("State transition not allowed; sprint is closed.");
+        }
+
+        public void Approve()
+        {
+            Console.WriteLine("State transition not allowed; sprint is closed.");
         }
 
         public void FinishPipeline()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("State transition not allowed; sprint is closed.");
         }
 
-        public void PipelineError()
+        public void FinishReview()
         {
-            throw new NotImplementedException();
-        }
-
-        public void Review()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Start()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void StartPipeline()
-        {
-            throw new NotImplementedException();
+            Console.WriteLine("State transition not allowed; sprint is closed.");
         }
     }
 }

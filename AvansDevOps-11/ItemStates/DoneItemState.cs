@@ -7,41 +7,41 @@ namespace AvansDevOps_11.ItemStates
 {
     public class DoneItemState : IItemState
     {
-        private BacklogItem item;
+        private BacklogItem _item;
 
         public DoneItemState(BacklogItem item)
         {
-            this.item = item;
+            this._item = item;
         }
 
         public void Start()
         {
-            Console.WriteLine("Item is already done.");
+            Console.WriteLine("State transition not allowed; Item is already done.");
         }
         public void Finish()
         {
-            Console.WriteLine("Item is already done.");
+            Console.WriteLine("State transition not allowed; Item is already done.");
         }
         public void Test()
         {
-            Console.WriteLine("Item is already done.");
+            Console.WriteLine("State transition not allowed; Item is already done.");
         }
         public void FinishTest()
         {
-            Console.WriteLine("Item is already done.");
+            Console.WriteLine("State transition not allowed; Item is already done.");
         }
         public void Redo()
         {
             Console.WriteLine("Moving item back to 'ToDo'");
-            this.item.ItemState = new ToDoItemState(this.item);
+            this._item.ItemState = new ToDoItemState(this._item);
         }
         public void Retest()
         {
-            Console.WriteLine("Item is already done.");
+            Console.WriteLine("State transition not allowed; Item is already done.");
         }
         public void Done()
         {
-            Console.WriteLine("Item is already done.");
+            Console.WriteLine("State transition not allowed; Item is already done.");
         }
     }
 }

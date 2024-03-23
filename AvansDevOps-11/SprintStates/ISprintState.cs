@@ -10,10 +10,8 @@ namespace AvansDevOps_11.SprintStates
         public void Start();
         public void Finish();
         public void Cancel();
-        public void StartPipeline();
-        public void Close();
+        public void Approve();
         public void FinishPipeline();
-        public void PipelineError();
-        public void Review();
+        public void FinishReview();
     }
 }

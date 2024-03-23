@@ -7,50 +7,35 @@ namespace AvansDevOps_11.SprintStates
 {
     public class CanceledSprintState : ISprintState
     {
-        private Sprint Sprint;
-        public CanceledSprintState(Sprint sprint)
-        {
-            this.Sprint = sprint;
-        }
         public void Start()
         {
-            Console.WriteLine("Sprint has been canceled and cannot be restarted.");
+            Console.WriteLine("State transition not allowed; sprint is canceled.");
         }
 
         public void Cancel()
         {
-            Console.WriteLine("Sprint has already been canceled.");
-        }
-
-        public void Close()
-        {
-            Console.WriteLine("Sprint has been canceled and cannot be closed.");
+            Console.WriteLine("State transition not allowed; sprint is canceled.");
         }
 
         public void Finish()
         {
-            Console.WriteLine("Sprint has been canceled.");
+            Console.WriteLine("State transition not allowed; sprint is canceled.");
         }
 
-        public void StartPipeline()
+        public void Approve()
         {
-            Console.WriteLine("Sprint has been canceled and cannot be released.");
+            Console.WriteLine("State transition not allowed; sprint is canceled.");
         }
+
 
         public void FinishPipeline()
         {
-            Console.WriteLine("There is no pipeline in progress.");
+            Console.WriteLine("State transition not allowed; sprint is canceled.");
         }
 
-        public void PipelineError()
+        public void FinishReview()
         {
-            Console.WriteLine("Sprint is not releasing.");
+            Console.WriteLine("State transition not allowed; sprint is canceled.");
         }
-
-        public void Review()
-        {
-            Console.WriteLine("Sprint has been canceled and cannot be reviewed.");
-        }
-        
     }
 }

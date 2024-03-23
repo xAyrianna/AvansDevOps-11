@@ -7,50 +7,39 @@ namespace AvansDevOps_11.SprintStates
 {
     public class CreatedSprintState : ISprintState
     {
-        private Sprint Sprint;
+        private Sprint _sprint;
         public CreatedSprintState(Sprint sprint)
         {
-            this.Sprint = sprint;
+            this._sprint = sprint;
         }
         public void Start()
         {
-            Sprint.SprintState = new InProgressSprintState(Sprint);
             Console.WriteLine("Starting sprint.");
+            _sprint.SprintState = new InProgressSprintState(_sprint);
         }
         public void Cancel()
         {
-            Console.WriteLine("Sprint has not started yet and cannot be cancelled.");
-        }
-
-        public void Close()
-        {
-            Console.WriteLine("Sprint has not started yet and cannot be closed.");
+            Console.WriteLine("State transition not allowed; sprint has not started yet and cannot be cancelled.");
         }
 
         public void Finish()
         {
-            Console.WriteLine("Sprint has not started yet and cannot be finished.");
+            Console.WriteLine("State transition not allowed; sprint has not started yet and cannot be finished.");
         }
 
-        public void StartPipeline()
+        public void Approve()
         {
-            Console.WriteLine("Sprint has not started yet and cannot be released.");
+            Console.WriteLine("State transition not allowed; sprint has not started yet and cannot be approved.");
         }
 
         public void FinishPipeline()
         {
-            Console.WriteLine("There is no pipeline in progress.");
-        }   
-
-        public void PipelineError()
-        {
-            Console.WriteLine("Sprint is not releasing.");
+            Console.WriteLine("State transition not allowed; sprint has not started yet and no pipeline is running.");
         }
 
-        public void Review()
+        public void FinishReview()
         {
-            Console.WriteLine("Sprint has not started yet and cannot be reviewed.");
+            Console.WriteLine("State transition not allowed; sprint is not in review.");
         }
-
     }
 }

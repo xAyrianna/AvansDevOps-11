@@ -1,3 +1,4 @@
+using AvansDevOps_11.PipelineClasses.PipelineStates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,52 +8,60 @@ namespace AvansDevOps_11.SprintStates
 {
     public class RunningPipelineSprintState : ISprintState
     {
-        private Sprint Sprint;
+        private Sprint _sprint;
         public RunningPipelineSprintState(Sprint sprint)
         {
-            this.Sprint = sprint;
+            this._sprint = sprint;
         }
         public void Start()
         {
-            Console.WriteLine("Sprint is already releasing.");
+            Console.WriteLine("State transition not allowed; sprint is already releasing.");
         }
 
         public void Cancel()
         {
-            Console.WriteLine("Sprint cannot be cancelled while releasing.");
-        }
-
-        public void Close()
-        {
-            Console.WriteLine("Sprint cannot be closed while releasing.");
+            if ((_sprint.Pipeline != null) && (_sprint.Pipeline.State.GetType() == typeof(PipelineErrorState)))
+            {
+                Console.WriteLine("Canceling sprint.");
+                _sprint.SprintState = new CanceledSprintState();
+            }
+            else
+            {
+                Console.WriteLine("State transition not allowed; sprint cannot be cancelled.");
+            }
         }
 
         public void Finish()
         {
-            Console.WriteLine("Sprint cannot be finished while releasing.");
+            Console.WriteLine("State transition not allowed; sprint has already finished.");
         }
 
-        public void StartPipeline()
+        public void Approve()
         {
-            Console.WriteLine("Pipeline is already running.");
+            Console.WriteLine("State transition not allowed; sprint has already been approved.");
         }
 
         public void FinishPipeline()
         {
-            Console.WriteLine("Pipeline has finished.");
-            Sprint.SprintState = new FinishedPipelineSprintState(Sprint);
-        }
-        public void PipelineError()
-        {
-            Console.WriteLine("Pipeline has an error.");
-            Sprint.SprintState = new PipelineErrorSprintState(Sprint);
+            if ((_sprint.Pipeline != null) && ((_sprint.Pipeline.State.GetType() == typeof(FinishedPipelineState)) || (_sprint.Pipeline.State.GetType() == typeof(PipelineErrorState))))
+            {
+                if (_sprint.Review)
+                {
+                    Console.WriteLine("Starting sprint review process");
+                    _sprint.SprintState = new InReviewSprintState(_sprint);
+                }
+                else
+                {
+                    Console.WriteLine("Closing sprint.");
+                    _sprint.SprintState = new ClosedSprintState();
+                }   
+            }
         }
 
-        public void Review()
+        public void FinishReview()
         {
-            Console.WriteLine("Sprint is not ready for review.");
+            Console.WriteLine("State transition not allowed; sprint is not in review.");
         }
-        
-  
+
     }
 }

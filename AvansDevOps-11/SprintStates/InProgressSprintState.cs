@@ -7,52 +7,42 @@ namespace AvansDevOps_11.SprintStates
 {
     public class InProgressSprintState : ISprintState
     {
-        private Sprint Sprint;
+        private Sprint _sprint;
 
         public InProgressSprintState(Sprint sprint)
         {
-            this.Sprint = sprint;
+            this._sprint = sprint;
         }
         public void Start()
         {
-            Console.WriteLine("Sprint is already started.");
+            Console.WriteLine("State transition not allowed; sprint has already started.");
         }
         public void Cancel()
         {
-            Console.WriteLine("Sprint is in progress and cannot be cancelled.");
-        }
-
-        public void Close()
-        {
-            Console.WriteLine("Sprint is in progress and cannot be closed.");
+            Console.WriteLine("State transition not allowed; sprint is in progress and cannot be cancelled.");
         }
 
         public void Finish()
         {
-            Sprint.SprintState = new FinishedSprintState(Sprint);
             Console.WriteLine("Finishing sprint.");
+            _sprint.SprintState = new FinishedSprintState(_sprint);
         }
 
-        public void StartPipeline()
+        public void Approve()
         {
-            Console.WriteLine("Sprint is in progress and cannot be released.");
+            Console.WriteLine("State transition not allowed; sprint is in progress and cannot be approved.");
         }
 
         public void FinishPipeline()
         {
-            Console.WriteLine("There is no pipeline in progress.");
+            Console.WriteLine("State transition not allowed; sprint is in progress and no pipeline is running.");
         }
 
-        public void PipelineError()
+        public void FinishReview()
         {
-            Console.WriteLine("Sprint is not releasing.");
+            Console.WriteLine("State transition not allowed; sprint is not in review.");
         }
 
-        public void Review()
-        {
-            Console.WriteLine("Sprint is in progress and cannot be reviewed.");
-        }
 
-        
     }
 }

@@ -7,41 +7,41 @@ namespace AvansDevOps_11.ItemStates
 {
     public class ReadyForTestingItemState : IItemState
     {
-        private BacklogItem Item;
+        private BacklogItem _item;
         
         public ReadyForTestingItemState(BacklogItem item)
         {
-            this.Item = item;
+            this._item = item;
         }
 
         public void Start()
         {
-           Console.WriteLine("Item is already started");
+           Console.WriteLine("State transition not allowed; Item is already started");
         }
         public void Finish()
         {
-            Console.WriteLine("Item should be tested first");
+            Console.WriteLine("State transition not allowed; Item should be tested first");
         }
         public void Test()
         {
             Console.WriteLine("Moving item to 'Testing'");
-            this.Item.ItemState = new TestingItemState(this.Item);
+            this._item.ItemState = new TestingItemState(this._item);
         }
         public void FinishTest()
         {
-            Console.WriteLine("Item should be tested first");
+            Console.WriteLine("State transition not allowed; Item should be tested first");
         }
         public void Redo()
         {
-            Console.WriteLine("Item can't be redone, it's already started");
+            Console.WriteLine("State transition not allowed; Item can't be redone, it's already started");
         }
         public void Retest()
         {
-            Console.WriteLine("Item has not been tested yet");
+            Console.WriteLine("State transition not allowed; Item has not been tested yet");
         }
         public void Done()
         {
-            Console.WriteLine("Item has not been tested nor checked yet");
+            Console.WriteLine("State transition not allowed; Item has not been tested nor checked yet");
         }
     }
 }
