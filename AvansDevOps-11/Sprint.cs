@@ -82,6 +82,29 @@ namespace AvansDevOps_11
             Developers.Remove(developer);
         }
 
+        public void AddTester(Tester tester)
+        {
+            Testers.Add(tester);
+        }
+
+        public void RemoveTester(Tester tester)
+        {
+            Testers.Remove(tester);
+        }
+
+        public void UploadReviewSummary()
+        {
+            if (Review && State is InReviewSprintState)
+            {
+                ReviewSummary = new Document();
+                State.FinishReview();
+            }
+            else
+            {
+                Console.WriteLine("Can not upload review summary when review is not needed.");
+            }
+        }
+
         public int GetTotalStoryPoints()
         {
             int totalStoryPoints = 0;

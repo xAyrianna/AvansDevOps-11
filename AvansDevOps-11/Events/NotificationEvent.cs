@@ -10,21 +10,21 @@ namespace AvansDevOps_11.Events
 {
     public class NotificationEvent
     {
-        public List<INotificationAdapter> subscribers = new();
+        public List<INotificationAdapter> Subscribers = new();
 
         public void Subscribe(INotificationAdapter subscriber)
         {
-            subscribers.Add(subscriber);
+            Subscribers.Add(subscriber);
         }
 
         public void Unsubscribe(INotificationAdapter subscriber)
         {
-            subscribers.Remove(subscriber);
+            Subscribers.Remove(subscriber);
         }
 
         public void Notify(List<User> users, string msg, string subject)
         {
-            foreach (var subscriber in subscribers)
+            foreach (var subscriber in Subscribers)
             {
                 subscriber.SendNotification(users, msg, subject);
             }
