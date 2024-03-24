@@ -1,6 +1,6 @@
 namespace AvansDevOps_11
 {
-    public enum GitControlConcept
+    public enum VersionControlConcept
     {
         COMMIT,
         PUSH,

@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps_11
 {
-    public class GitConnection
+    public class VersionControlConnection
     {
         public string Link;
-        public GitControlConcept GitControlConcept;
-        public GitConnection(string link, GitControlConcept gitControlConcept)
+        public VersionControlConcept VersionControlConcept;
+        public VersionControlConnection(string link, VersionControlConcept versionControlConcept)
         {
             Link = link;
-            GitControlConcept = gitControlConcept;
+            VersionControlConcept = versionControlConcept;
         }
     }
 }
