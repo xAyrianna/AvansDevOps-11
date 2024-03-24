@@ -6,28 +6,25 @@ using AvansDevOps_11.Visitors;
 
 namespace AvansDevOps_11.Composites.PipelineComposite
 {
-    public class PipelineComposite : IPipelineActivity
+    public class PipelineComposite : PipelineActivity
     {
-        private List<IPipelineActivity> Children = new List<IPipelineActivity>();
+        private List<PipelineActivity> Children = new List<PipelineActivity>();
 
-        public string Name { get; set; }
-
-        public PipelineComposite(string name)
+        public PipelineComposite(PipelineActionType actionType): base(actionType)
         {
-            Name = name;
         }
 
-        public void Add(IPipelineActivity activity)
+        public void Add(PipelineActivity activity)
         {
             Children.Add(activity);
         }
 
-        public void Remove(IPipelineActivity activity)
+        public void Remove(PipelineActivity activity)
         {
             Children.Remove(activity);
         }
 
-        public void Accept(PipelineVisitor visitor)
+        public override void Accept(PipelineVisitor visitor)
         {
             visitor.Visit(this);
             foreach (var child in Children)

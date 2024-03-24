@@ -1,5 +1,7 @@
 
 
+using AvansDevOps_11.Composites.PipelineComposite;
+
 namespace AvansDevOps_11.States.SprintStates
 {
     public class FinishedSprintState : ISprintState
@@ -30,7 +32,15 @@ namespace AvansDevOps_11.States.SprintStates
             Console.WriteLine("Sprint approved.");
             if (_sprint.Pipeline != null)
             {
-                Console.WriteLine("Starting developoment pipeline.");
+                if (_sprint.GetType() == typeof(ReleaseSprint))
+                {
+                    if (_sprint.Pipeline.Activities.Last().ActionType != PipelineActionType.DEPLOY)
+                    {
+                        Console.WriteLine("Pipeline does not end with a deploy action; please end with a deployment action.");
+                        return;
+                    }
+                }
+                Console.WriteLine("Starting development pipeline.");
                 _sprint.State = new RunningPipelineSprintState(_sprint);
             }
             else if (_sprint.Review)

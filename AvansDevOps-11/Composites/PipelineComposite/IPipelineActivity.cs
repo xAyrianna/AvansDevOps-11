@@ -6,8 +6,13 @@ using AvansDevOps_11.Visitors;
 
 namespace AvansDevOps_11.Composites.PipelineComposite
 {
-    public interface IPipelineActivity
+    public abstract class PipelineActivity
     {
-        public void Accept(PipelineVisitor visitor);
+        public PipelineActionType ActionType { get; set; }
+        public PipelineActivity(PipelineActionType actionType)
+        {
+            ActionType = actionType;
+        }
+        public abstract void Accept(PipelineVisitor visitor);
     }
 }

@@ -6,16 +6,16 @@ using AvansDevOps_11.Visitors;
 
 namespace AvansDevOps_11.Composites.PipelineComposite
 {
-    public class PipelineAction : IPipelineActivity
+    public class PipelineAction : PipelineActivity
     {
         public string Command;
 
-        public PipelineAction(string command)
+        public PipelineAction(string command, PipelineActionType actionType): base(actionType)
         {
             Command = command;
         }
 
-        public void Accept(PipelineVisitor visitor)
+        public override void Accept(PipelineVisitor visitor)
         {
             visitor.Visit(this);
         }

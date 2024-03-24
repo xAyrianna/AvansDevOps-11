@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AvansDevOps_11.Visitors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace AvansDevOps_11.States.PipelineStates
         public RunningPipelineState(Pipeline pipeline)
         {
             _pipeline = pipeline;
+            PipelineVisitor pipelineVisitor = new ExecutePipelineVisitor();
+            _pipeline.Accept(pipelineVisitor);
         }
 
         public void Start()

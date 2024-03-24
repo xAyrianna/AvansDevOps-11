@@ -15,7 +15,7 @@ namespace AvansDevOps_11.Visitors
         }
         public override void Visit(PipelineComposite composite)
         {
-            Console.WriteLine("Executing composite: " + composite.Name);
+            Console.WriteLine("Executing composite: " + composite.ActionType);
 
         }
         public override void Visit(PipelineAction action)

@@ -36,15 +36,23 @@ namespace AvansDevOps_11.Builders.ReportBuilder
             team.AppendLine("Team members: ");
             team.AppendLine("Product owner: " + _sprint.Project.ProductOwner.Name);
             team.AppendLine("Scrum master: " + _sprint.ScrumMaster.Name);
-            team.AppendLine("Developers: ");
-            foreach (var teamMember in _sprint.Developers)
+            if (_sprint.Developers.Count == 0) team.AppendLine("No developers in team.");
+            else
             {
-                team.AppendLine(teamMember.Name);
+                team.AppendLine("Developers: ");
+                foreach (var teamMember in _sprint.Developers)
+                {
+                    team.AppendLine(teamMember.Name);
+                }
             }
-            team.AppendLine("Testers: ");
-            foreach (var teamMember in _sprint.Testers)
+            if (_sprint.Testers.Count == 0) team.AppendLine("No testers in team.");
+                       else
             {
-                team.AppendLine(teamMember.Name);
+                team.AppendLine("Testers: ");
+                foreach (var teamMember in _sprint.Testers)
+                {
+                    team.AppendLine(teamMember.Name);
+                }
             }
 
             _team = team.ToString();

@@ -12,7 +12,7 @@ namespace AvansDevOps_11
     {
         public Sprint Sprint { get; set; }
         public IPipelineState State { get; set; }
-        public List<IPipelineActivity> Activities = new List<IPipelineActivity>();
+        public List<PipelineActivity> Activities = new List<PipelineActivity>();
 
         public Pipeline(Sprint sprint)
         {
@@ -29,7 +29,7 @@ namespace AvansDevOps_11
             }
         }
 
-        public void AddActivity(IPipelineActivity activity)
+        public void AddActivity(PipelineActivity activity)
         {
             if (State is CreatedPipelineState)
             {
@@ -41,7 +41,7 @@ namespace AvansDevOps_11
             }
         }
 
-        public void RemoveActivity(IPipelineActivity activity)
+        public void RemoveActivity(PipelineActivity activity)
         {
             if (State is CreatedPipelineState)
             {

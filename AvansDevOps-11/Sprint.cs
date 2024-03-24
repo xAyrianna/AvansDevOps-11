@@ -1,4 +1,5 @@
 using AvansDevOps_11.Adapters.NotificationAdapter;
+using AvansDevOps_11.Builders.ReportBuilder;
 using AvansDevOps_11.Events;
 using AvansDevOps_11.States.SprintStates;
 using AvansDevOps_11.Users;
@@ -29,6 +30,7 @@ namespace AvansDevOps_11
         public Document? ReviewSummary { get; set; }
 
         public NotificationEvent NotificationEvent { get; set; }
+        private ReportBuilder _reportBuilder;
 
 
         public Sprint(Project project, ScrumMaster scrumMaster)

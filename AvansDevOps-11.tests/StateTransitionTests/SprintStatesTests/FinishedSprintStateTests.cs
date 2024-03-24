@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AvansDevOps_11.Composites.PipelineComposite;
 using AvansDevOps_11.States.SprintStates;
 using Xunit;
 
@@ -69,7 +70,7 @@ namespace AvansDevOps_11.tests.StateTransitionTests.SprintStatesTests
         }
 
         [Fact]
-        public void ApproveSprint_ForPipelineSprint_In_FinishedState()
+        public void ApproveSprint_ForNonReleaseSprint_With_Pipeline_In_FinishedState()
         {
             // Arrange
             _sprint.Pipeline = new Pipeline(_sprint);
@@ -80,6 +81,42 @@ namespace AvansDevOps_11.tests.StateTransitionTests.SprintStatesTests
 
             // Assert
             Assert.IsType<RunningPipelineSprintState>(_sprint.State);
+        }
+
+        [Fact]
+        public void ApproveSprint_ForReleaseSprint_With_Deployment_Pipeline_In_FinishedState()
+        {
+            // Arrange
+            Sprint releaseSprint = new ReleaseSprint(new Project("Test project", new Users.ProductOwner("John Doe", "John Doe")), new Users.ScrumMaster("Jane Doe", "Jane Doe"));
+            releaseSprint.State = new FinishedSprintState(releaseSprint);
+            releaseSprint.Pipeline = new Pipeline(releaseSprint);
+            PipelineComposite pipelineComposite = new PipelineComposite(PipelineActionType.DEPLOY);
+            pipelineComposite.Add(new PipelineAction("Test run", PipelineActionType.DEPLOY));
+            releaseSprint.Pipeline.AddActivity(pipelineComposite);
+
+            // Act
+            releaseSprint.State.Approve();
+
+            // Assert
+            Assert.IsType<RunningPipelineSprintState>(releaseSprint.State);
+        }
+
+        [Fact]
+        public void ApproveSprint_ForReleaseSprint_Without_Deployment_Pipeline_In_FinishedState()
+        {
+            // Arrange
+            Sprint releaseSprint = new ReleaseSprint(new Project("Test project", new Users.ProductOwner("John Doe", "John Doe")), new Users.ScrumMaster("Jane Doe", "Jane Doe"));
+            releaseSprint.State = new FinishedSprintState(releaseSprint);
+            releaseSprint.Pipeline = new Pipeline(releaseSprint);
+            PipelineComposite pipelineComposite = new PipelineComposite(PipelineActionType.TEST);
+            pipelineComposite.Add(new PipelineAction("Test run", PipelineActionType.TEST));
+            releaseSprint.Pipeline.AddActivity(pipelineComposite);
+
+            // Act
+            releaseSprint.State.Approve();
+
+            // Assert
+            Assert.IsType<FinishedSprintState>(releaseSprint.State);
         }
 
         [Fact]
