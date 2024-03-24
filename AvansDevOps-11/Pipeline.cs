@@ -28,5 +28,29 @@ namespace AvansDevOps_11
                 activity.Accept(visitor);
             }
         }
+
+        public void AddActivity(IPipelineActivity activity)
+        {
+            if (State is CreatedPipelineState)
+            {
+                Activities.Add(activity);
+            }
+            else
+            {
+                Console.WriteLine("Can no longer add activity to pipeline.");
+            }
+        }
+
+        public void RemoveActivity(IPipelineActivity activity)
+        {
+            if (State is CreatedPipelineState)
+            {
+                Activities.Remove(activity);
+            }
+            else
+            {
+                Console.WriteLine("Can no longer remove activity from pipeline.");
+            }
+        }
     }
 }
