@@ -23,4 +23,7 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AvansDevOps-11\AvansDevOps-11.csproj" />
+  </ItemGroup>
 </Project>
