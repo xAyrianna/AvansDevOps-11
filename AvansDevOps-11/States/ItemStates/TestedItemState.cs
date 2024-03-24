@@ -39,7 +39,7 @@ namespace AvansDevOps_11.States.ItemStates
             Console.WriteLine("Moving item back to 'Ready for testing'");
             _item.ItemState = new ReadyForTestingItemState(_item);
         }
-        public void Done()
+        public void Approve()
         {
             Console.WriteLine("Moving item to 'Done'");
             _item.ItemState = new DoneItemState(_item);

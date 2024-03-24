@@ -36,7 +36,7 @@ namespace AvansDevOps_11.States.ItemStates
         {
             Console.WriteLine("State transition not allowed; Item is already done.");
         }
-        public void Done()
+        public void Approve()
         {
             Console.WriteLine("State transition not allowed; Item is already done.");
         }

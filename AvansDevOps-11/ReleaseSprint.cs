@@ -8,9 +8,11 @@ namespace AvansDevOps_11
 {
     public class ReleaseSprint : Sprint
     {
+
         public ReleaseSprint(Project project, ScrumMaster scrumMaster) : base(project, scrumMaster)
         {   
             this.Review = false;
+            this.Pipeline = new Pipeline(this);
         }
     }
 }

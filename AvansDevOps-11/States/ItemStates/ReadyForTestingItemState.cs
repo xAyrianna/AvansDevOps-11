@@ -39,7 +39,7 @@ namespace AvansDevOps_11.States.ItemStates
         {
             Console.WriteLine("State transition not allowed; Item has not been tested yet");
         }
-        public void Done()
+        public void Approve()
         {
             Console.WriteLine("State transition not allowed; Item has not been tested nor checked yet");
         }

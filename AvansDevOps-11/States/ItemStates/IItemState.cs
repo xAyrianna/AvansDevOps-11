@@ -13,6 +13,6 @@ namespace AvansDevOps_11.States.ItemStates
         public void FinishTest();
         public void Redo();
         public void Retest();
-        public void Done();
+        public void Approve();
     }
 }
