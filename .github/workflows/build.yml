@@ -43,8 +43,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"xAyrianna_AvansDevOps-11" /o:"xayrianna" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"xAyrianna_AvansDevOps-11" /o:"xayrianna" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html
           dotnet build AvansDevOps-11
           dotnet tool install --global JetBrains.dotCover.GlobalTool
-          dotnet dotcover test AvansDevOps.Test --dcReportType=HTML
+          dotnet dotcover test AvansDevOps-11.tests --dcReportType=HTML
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
