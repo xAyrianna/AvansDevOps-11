@@ -1,4 +1,5 @@
 using AvansDevOps_11.States.ItemStates;
+using AvansDevOps_11.States.SprintStates;
 using AvansDevOps_11.Users;
 
 namespace AvansDevOps_11
@@ -26,25 +27,45 @@ namespace AvansDevOps_11
 
         public void AddActivity(Activity activity)
         {
-            if (Activities == null)
+            if (Sprint.State is CreatedSprintState)
             {
-                Activities = new List<Activity>();
+                if (Activities == null)
+                {
+                    Activities = new List<Activity>();
+                }
+                Activities.Add(activity);
             }
-            Activities.Add(activity);
+            else
+            {
+                Console.WriteLine("Cannot add activity to item in sprint; Sprint has already started.");
+            }
+
         }
 
         public void RemoveActivity(Activity activity)
         {
-            if (Activities == null)
+            if (Sprint.State is CreatedSprintState)
             {
-                return;
+                if (Activities == null)
+                {
+                    return;
+                }
+                Activities.Remove(activity);
             }
-            Activities.Remove(activity);
+            else
+            {
+                Console.WriteLine("Cannot remove activity to item in sprint; Sprint has already started.");
+            }
         }
 
         public void CreateThread(User user, string subject, string? description = null)
         {
             Threads.Add(subject, new Thread(this, user, subject, description));
+        }
+
+        public void DeleteThread(string subject)
+        {
+            Threads.Remove(subject);
         }
     }
 }
