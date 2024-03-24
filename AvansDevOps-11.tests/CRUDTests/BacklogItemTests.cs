@@ -13,7 +13,7 @@ namespace AvansDevOps_11.tests.CRUDTests
     {
         private Developer developer = new Developer("Joe Doe", "Joe Doe");
         private Sprint sprint = new ReviewSprint(new Project("TestProject", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"));
-        
+
         [Fact]
         public void Assert_Item_Is_In_ToDoItemState()
         {
@@ -53,7 +53,7 @@ namespace AvansDevOps_11.tests.CRUDTests
             backlogItem.AddActivity(activity);
 
             // Assert
-            Assert.DoesNotContain(activity, backlogItem.Activities);
+            Assert.Null(backlogItem.Activities);
         }
 
         [Fact]
@@ -78,10 +78,10 @@ namespace AvansDevOps_11.tests.CRUDTests
             // Arrange
             var backlogItem = new BacklogItem(sprint, developer, "Test", "Test", 5);
             var activity = new Activity(developer, "Test", "Test");
+            backlogItem.AddActivity(activity);
             sprint.State = new InProgressSprintState(sprint);
 
             // Act
-            backlogItem.AddActivity(activity);
             backlogItem.RemoveActivity(activity);
 
             // Assert
@@ -93,7 +93,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         {
             // Arrange
             var backlogItem = new BacklogItem(sprint, developer, "Test", "Test", 5);
-            
+
 
             // Act
             backlogItem.CreateThread(developer, "Test");
@@ -114,6 +114,35 @@ namespace AvansDevOps_11.tests.CRUDTests
 
             // Assert
             Assert.False(backlogItem.Threads.Any());
+        }
+
+        [Fact]
+        public void Assert_Adding_VersionControlConnection_To_Item()
+        {
+            // Arrange
+            var backlogItem = new BacklogItem(sprint, developer, "Test", "Test", 5);
+            var versionControlConnection = new VersionControlConnection("TestURL", VersionControlConcept.PUSH);
+
+            // Act
+            backlogItem.AddVersionControlConnection(versionControlConnection);
+
+            // Assert
+            Assert.Contains(versionControlConnection, backlogItem.VersionControlConnections);
+        }
+
+        [Fact]
+        public void Assert_Removing_VersionControlConnection_From_Item()
+        {
+            // Arrange
+            var backlogItem = new BacklogItem(sprint, developer, "Test", "Test", 5);
+            var versionControlConnection = new VersionControlConnection("TestURL", VersionControlConcept.PUSH);
+            backlogItem.AddVersionControlConnection(versionControlConnection);
+
+            // Act
+            backlogItem.RemoveVersionControlConnection(versionControlConnection);
+
+            // Assert
+            Assert.DoesNotContain(versionControlConnection, backlogItem.VersionControlConnections);
         }
     }
 }

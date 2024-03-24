@@ -107,5 +107,36 @@ namespace AvansDevOps_11.tests.StateTransitionTests.ItemStateTests
             // Assert
             Assert.IsType<DoneItemState>(_item.ItemState);
         }
+
+        [Fact]
+        public void Threads_Close_When_Item_Is_Done()
+        {
+            // Arrange
+            _item.CreateThread(new Developer("Joey Doe", "Joey Doe"), "Test thread");
+            _item.ItemState = new DoneItemState(_item);
+            // Act
+
+            // Assert
+            foreach (var thread in _item.Threads)
+            {
+                Assert.True(thread.Value.IsClosed);
+            }
+        }
+
+        [Fact]
+        public void Threads_ReOpen_When_Item_Is_Redone()
+        {
+            // Arrange
+            _item.CreateThread(new Developer("Joey Doe", "Joey Doe"), "Test thread");
+            _item.ItemState = new DoneItemState(_item);
+            _item.ItemState.Redo();
+            // Act
+
+            // Assert
+            foreach (var thread in _item.Threads)
+            {
+                Assert.False(thread.Value.IsClosed);
+            }
+        }
     }
 }
