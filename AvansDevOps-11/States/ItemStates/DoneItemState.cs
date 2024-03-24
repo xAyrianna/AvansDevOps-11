@@ -9,6 +9,10 @@ namespace AvansDevOps_11.States.ItemStates
         public DoneItemState(BacklogItem item)
         {
             _item = item;
+            foreach (var thread in item.Threads)
+            {
+                thread.Value.IsClosed = true;
+            }
         }
 
         public void Start()
@@ -29,6 +33,10 @@ namespace AvansDevOps_11.States.ItemStates
         }
         public void Redo()
         {
+            foreach (var thread in _item.Threads)
+            {
+                thread.Value.IsClosed = false;
+            }
             Console.WriteLine("Moving item back to 'ToDo'");
             _item.ItemState = new ToDoItemState(_item);
         }

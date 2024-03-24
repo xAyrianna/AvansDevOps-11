@@ -11,6 +11,7 @@ namespace AvansDevOps_11
         public User ThreadOwner;
         public string Subject { get; set; }
         public string? Description { get; set; }
+        public bool IsClosed { get; set; } = false;
         HashSet<User> UsersInThread = new();
         List<ThreadReaction> Reactions = new();
         BacklogItem BacklogItem;
@@ -30,6 +31,6 @@ namespace AvansDevOps_11
             UsersInThread.Add(reaction.User);
             BacklogItem.Sprint.NotificationEvent.Notify(UsersInThread.ToList(), $"Reaction added to thread", "Reaction added");
         }
-        
+
     }
 }
