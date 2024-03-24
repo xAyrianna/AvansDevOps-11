@@ -96,7 +96,7 @@ namespace AvansDevOps_11.tests.StateTransitionTests.ItemStateTests
         }
 
         [Fact]
-        public void ApproveItem_In_TestedState()
+        public void ApproveItem_For_No_Activities_In_TestedState()
         {
             // Arrange
             _item.ItemState = new TestedItemState(_item);
@@ -107,5 +107,42 @@ namespace AvansDevOps_11.tests.StateTransitionTests.ItemStateTests
             // Assert
             Assert.IsType<DoneItemState>(_item.ItemState);
         }
+
+        [Fact]
+        public void ApproveItem_For_Activities_Not_Completely_Done_In_TestedState()
+        {
+            // Arrange
+            _item.ItemState = new TestedItemState(_item);
+            var activity1 = new Activity(_item.Developer, "Test activity 1", "Test description 1");
+            var activity2 = new Activity(_item.Developer, "Test activity 2", "Test description 2");
+            activity1.IsDone = true;
+            _item.Activities = new List<Activity> { activity1, activity2 };
+
+
+            // Act
+            _item.ItemState.Approve();
+
+            // Assert
+            Assert.IsType<TestedItemState>(_item.ItemState);
+        }
+
+        [Fact]
+        public void ApproveItem_For_Activities_Completely_Done_In_TestedState()
+        {
+            // Arrange
+            _item.ItemState = new TestedItemState(_item);
+            var activity1 = new Activity(_item.Developer, "Test activity 1", "Test description 1");
+            var activity2 = new Activity(_item.Developer, "Test activity 2", "Test description 2");
+            activity1.IsDone = true;
+            activity2.IsDone = true;
+            _item.Activities = new List<Activity> { activity1, activity2 };
+
+            // Act
+            _item.ItemState.Approve();
+
+            // Assert
+            Assert.IsType<DoneItemState>(_item.ItemState);
+        }
+        
     }
 }

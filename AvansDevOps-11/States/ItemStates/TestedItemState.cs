@@ -41,8 +41,27 @@ namespace AvansDevOps_11.States.ItemStates
         }
         public void Approve()
         {
-            Console.WriteLine("Moving item to 'Done'");
-            _item.ItemState = new DoneItemState(_item);
+            bool done = true;         
+            if(_item.Activities != null)
+            {
+                foreach (Activity activity in _item.Activities)
+                {
+                    if (!activity.IsDone)
+                    {
+                        done = false;
+                    }
+                }
+            }
+            if(done)
+            {
+                Console.WriteLine("Moving item to 'Done'");
+                _item.ItemState = new DoneItemState(_item);
+            }
+            else
+            {
+                Console.WriteLine("State transition not allowed; Not all activities are done");
+            }
+
         }
     }
 }
