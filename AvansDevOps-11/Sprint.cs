@@ -13,9 +13,12 @@ namespace AvansDevOps_11
     public abstract class Sprint
     {
         public Project Project;
-        public string Name { get { return Name; } set { if (State is CreatedSprintState) { Name = value; } else { Console.WriteLine("Can no longer change sprint name."); } } }
-        public DateTime StartDate { get { return StartDate; } set { if (State is CreatedSprintState) { StartDate = value; } else { Console.WriteLine("Can no longer change start date."); } } }
-        public DateTime EndDate { get { return EndDate; } set { if (State is CreatedSprintState) { EndDate = value; } else { Console.WriteLine("Can no longer change end date."); } } }
+        private string _name;
+        public string Name { get { return _name; } set { if (State is CreatedSprintState) { _name = value; } else { Console.WriteLine("Can no longer change sprint name."); } } }
+        private DateTime _startDate;
+        public DateTime StartDate { get { return _startDate; } set { if (State is CreatedSprintState) { _startDate = value; } else { Console.WriteLine("Can no longer change start date."); } } }
+        private DateTime _endDate;
+        public DateTime EndDate { get { return _endDate; } set { if (State is CreatedSprintState) { _endDate = value; } else { Console.WriteLine("Can no longer change end date."); } } }
         public List<BacklogItem> BacklogItems = new();
         public List<Developer> Developers = new();
         public List<Tester> Testers = new();

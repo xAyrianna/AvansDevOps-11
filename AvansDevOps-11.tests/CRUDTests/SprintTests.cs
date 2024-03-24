@@ -136,11 +136,11 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_StartDate_Can_Be_Changed_In_CreatedState()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
-            sprint.State = new CreatedSprintState(sprint);
-
-            // Act
-            sprint.StartDate = time;
+            var sprint = new ReviewSprint(project, scrumMaster)
+            {
+                // Act
+                StartDate = time
+            };
 
             // Assert
             Assert.Equal(time, sprint.StartDate);
@@ -151,7 +151,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         {
             // Arrange
             var sprint = new ReviewSprint(project, scrumMaster);
-            sprint.State = new InProgressSprintState(sprint);
+            sprint.State.Start();
 
             // Act
             sprint.StartDate = time;
@@ -165,14 +165,12 @@ namespace AvansDevOps_11.tests.CRUDTests
         {
             // Arrange
             var sprint = new ReviewSprint(project, scrumMaster);
-            sprint.State = new CreatedSprintState(sprint);
-            var yeehaw = new DateTime(2024, 1,1);
 
             // Act
-            sprint.EndDate = yeehaw;
+            sprint.EndDate = time;
 
             // Assert
-            Assert.Equal(yeehaw, sprint.EndDate);
+            Assert.Equal(time, sprint.EndDate);
         }
 
         [Fact]
