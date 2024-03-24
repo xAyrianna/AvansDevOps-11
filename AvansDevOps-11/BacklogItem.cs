@@ -4,7 +4,7 @@ using AvansDevOps_11.Users;
 
 namespace AvansDevOps_11
 {
-    public class BacklogItem
+    public class BacklogItem : SCM
     {
         public string Title { get; set; }
         public string Description { get; set; }
@@ -14,6 +14,7 @@ namespace AvansDevOps_11
         public Developer Developer;
         public IItemState ItemState { get; set; }
         public Dictionary<string, Thread> Threads = new Dictionary<string, Thread>();
+
 
         public BacklogItem(Sprint sprint, Developer developer, string title, string description, int storyPoints)
         {

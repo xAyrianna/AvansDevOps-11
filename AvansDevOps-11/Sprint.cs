@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps_11
 {
-    public abstract class Sprint
+    public abstract class Sprint : SCM
     {
         public Project Project;
         private string _name;

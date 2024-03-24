@@ -2,7 +2,7 @@ using AvansDevOps_11.Users;
 
 namespace AvansDevOps_11
 {
-    public class Activity
+    public class Activity : SCM
     {
         public Developer Developer;
         public string Title { get; set; }
