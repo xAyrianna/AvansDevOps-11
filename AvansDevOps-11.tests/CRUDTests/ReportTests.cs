@@ -13,15 +13,29 @@ namespace AvansDevOps_11.tests.CRUDTests
     public class ReportTests
     {
         private Sprint _sprint = new ReleaseSprint(new Project("Project", new ProductOwner("Product Owner", "PO")), new ScrumMaster("Scrum Master", "SM"));
+        private Mock<IExportStrategy> mockExportStrategy = new Mock<IExportStrategy>();
+
+        [Fact]
+        public void Assert_ExportFormat_Is_Added_To_Report()
+        {
+            // Arrange
+            ReportBuilder reportBuilder = new ReportBuilder(_sprint);
+
+            // Act
+            Report report = reportBuilder.AddExportFormat(mockExportStrategy.Object).GetReport();
+
+            // Assert
+            Assert.Contains(mockExportStrategy.Object, report.ExportFormats);
+        }
+
         [Fact]
         public void Assert_Header_Is_Added_To_Report()
         {
             // Arrange
             ReportBuilder reportBuilder = new ReportBuilder(_sprint);
-            
+
             // Act
-            reportBuilder.AddHeader("Header");
-            Report report = reportBuilder.GetReport();
+            Report report = reportBuilder.AddHeader("Header").AddExportFormat(mockExportStrategy.Object).GetReport();
 
             // Assert
             Assert.Contains("Header", report.ReportText);
@@ -32,10 +46,9 @@ namespace AvansDevOps_11.tests.CRUDTests
         {
             // Arrange
             ReportBuilder reportBuilder = new ReportBuilder(_sprint);
-            
+
             // Act
-            reportBuilder.AddFooter("Footer");
-            Report report = reportBuilder.GetReport();
+            Report report = reportBuilder.AddFooter("Footer").AddExportFormat(mockExportStrategy.Object).GetReport();
 
             // Assert
             Assert.Contains("Footer", report.ReportText);
@@ -46,10 +59,9 @@ namespace AvansDevOps_11.tests.CRUDTests
         {
             // Arrange
             ReportBuilder reportBuilder = new ReportBuilder(_sprint);
-            
+
             // Act
-            reportBuilder.AddTeam();
-            Report report = reportBuilder.GetReport();
+            Report report = reportBuilder.AddTeam().AddExportFormat(mockExportStrategy.Object).GetReport();
 
             // Assert
             Assert.Contains("Product Owner", report.ReportText);
@@ -62,10 +74,9 @@ namespace AvansDevOps_11.tests.CRUDTests
             _sprint.Developers.Add(new Developer("Developer", "D"));
             _sprint.Testers.Add(new Tester("Tester", "T"));
             ReportBuilder reportBuilder = new ReportBuilder(_sprint);
-            
+
             // Act
-            reportBuilder.AddTeam();
-            Report report = reportBuilder.GetReport();
+            Report report = reportBuilder.AddTeam().AddExportFormat(mockExportStrategy.Object).GetReport();
 
             // Assert
             Assert.Contains("Developer", report.ReportText);
@@ -77,10 +88,9 @@ namespace AvansDevOps_11.tests.CRUDTests
         {
             // Arrange
             ReportBuilder reportBuilder = new ReportBuilder(_sprint);
-            
+
             // Act
-            reportBuilder.AddProgress();
-            Report report = reportBuilder.GetReport();
+            Report report = reportBuilder.AddProgress().AddExportFormat(mockExportStrategy.Object).GetReport();
 
             // Assert
             Assert.Contains("Story point progress", report.ReportText);
@@ -91,10 +101,10 @@ namespace AvansDevOps_11.tests.CRUDTests
         {
             // Arrange
             ReportBuilder reportBuilder = new ReportBuilder(_sprint);
-            Report report = reportBuilder.GetReport();
             var mockExportStrategy = new Mock<IExportStrategy>();
-            report.AddExportStrategy(mockExportStrategy.Object);
-            
+            reportBuilder.AddExportFormat(mockExportStrategy.Object);
+            Report report = reportBuilder.GetReport();
+
             // Act
             report.Export();
 

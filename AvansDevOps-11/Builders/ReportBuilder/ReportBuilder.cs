@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AvansDevOps_11.Strategies.ExportStrategy;
 
 
 namespace AvansDevOps_11.Builders.ReportBuilder
@@ -14,23 +15,26 @@ namespace AvansDevOps_11.Builders.ReportBuilder
         private string? _footer;
         private string? _team;
         private string? _currentProgress;
+        private HashSet<IExportStrategy> _exportFormats = new();
 
         public ReportBuilder(Sprint sprint)
         {
             _sprint = sprint;
         }
 
-        public void AddHeader(string header)
+        public ReportBuilder AddHeader(string header)
         {
             _header = header;
+            return this;
         }
 
-        public void AddFooter(string footer)
+        public ReportBuilder AddFooter(string footer)
         {
             _footer = footer;
+            return this;
         }
 
-        public void AddTeam()
+        public ReportBuilder AddTeam()
         {
             StringBuilder team = new StringBuilder();
             team.AppendLine("Team members: ");
@@ -46,7 +50,7 @@ namespace AvansDevOps_11.Builders.ReportBuilder
                 }
             }
             if (_sprint.Testers.Count == 0) team.AppendLine("No testers in team.");
-                       else
+            else
             {
                 team.AppendLine("Testers: ");
                 foreach (var teamMember in _sprint.Testers)
@@ -56,9 +60,10 @@ namespace AvansDevOps_11.Builders.ReportBuilder
             }
 
             _team = team.ToString();
+            return this;
         }
 
-        public void AddProgress()
+        public ReportBuilder AddProgress()
         {
             StringBuilder progress = new StringBuilder();
             progress.AppendLine("Story point progress: ");
@@ -69,17 +74,28 @@ namespace AvansDevOps_11.Builders.ReportBuilder
                 progress.AppendLine("--------------------");
             }
             _currentProgress = progress.ToString();
+            return this;
+        }
+
+        public ReportBuilder AddExportFormat(IExportStrategy exportFormat)
+        {
+            _exportFormats.Add(exportFormat);
+            return this;
         }
 
         public Report GetReport()
         {
-            StringBuilder report = new StringBuilder();
-            if (_header is not null) report.AppendLine(_header);
-            report.AppendLine("Sprint report: " + _sprint.Name);
-            if (_team is not null) report.AppendLine(_team);
-            if (_currentProgress is not null) report.AppendLine(_currentProgress);
-            if (_footer is not null) report.AppendLine(_footer);
-            return new Report(report.ToString());
+            if (_exportFormats.Count == 0) throw new InvalidOperationException("No export formats added.");
+
+            StringBuilder reportText = new StringBuilder();
+            if (_header is not null) reportText.AppendLine(_header);
+            reportText.AppendLine("Sprint report: " + _sprint.Name);
+            if (_team is not null) reportText.AppendLine(_team);
+            if (_currentProgress is not null) reportText.AppendLine(_currentProgress);
+            if (_footer is not null) reportText.AppendLine(_footer);
+
+            Report report = new Report(reportText.ToString(), _exportFormats);
+            return report;
         }
 
     }

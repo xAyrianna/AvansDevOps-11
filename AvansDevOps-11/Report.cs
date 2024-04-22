@@ -9,27 +9,21 @@ namespace AvansDevOps_11
 {
     public class Report
     {
-        List<IExportStrategy> ExportStrategies = new();
+        public HashSet<IExportStrategy> ExportFormats = new();
         public string ReportText { get; set; }
 
-        public Report(string report)
+        public Report(string report, HashSet<IExportStrategy> exportFormats)
         {
             ReportText = report;
-        }
-
-        public void AddExportStrategy(IExportStrategy exportStrategy)
-        {
-            ExportStrategies.Add(exportStrategy);
+            ExportFormats = exportFormats;
         }
 
         public void Export()
         {
-            foreach (var exportStrategy in ExportStrategies)
+            foreach (var exportStrategy in ExportFormats)
             {
                 exportStrategy.Export(this);
             }
         }
-
-
     }
 }
