@@ -97,11 +97,11 @@ namespace AvansDevOps_11
             Testers.Remove(tester);
         }
 
-        public void UploadReviewSummary()
+        public void UploadReviewSummary(Document review)
         {
             if (Review && State is InReviewSprintState)
             {
-                ReviewSummary = new Document();
+                ReviewSummary = review;
                 State.FinishReview();
             }
             else
