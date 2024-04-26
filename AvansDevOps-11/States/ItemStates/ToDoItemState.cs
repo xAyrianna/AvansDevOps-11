@@ -1,3 +1,4 @@
+using AvansDevOps_11.States.SprintStates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,15 @@ namespace AvansDevOps_11.States.ItemStates
 
         public void Start()
         {
-            _item.ItemState = new DoingItemState(_item);
+            if (_item.Sprint.State is InProgressSprintState)
+            {
+                Console.WriteLine("Moving backlog item to 'doing'.");
+                _item.ItemState = new DoingItemState(_item);
+            }
+            else
+            {
+                Console.WriteLine("State transition not allowed; Sprint is not in progress");
+            }
         }
         public void Finish()
         {

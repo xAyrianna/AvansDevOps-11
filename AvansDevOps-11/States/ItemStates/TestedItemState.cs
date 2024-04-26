@@ -1,3 +1,4 @@
+using AvansDevOps_11.States.SprintStates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,32 +37,45 @@ namespace AvansDevOps_11.States.ItemStates
         }
         public void Retest()
         {
-            Console.WriteLine("Moving item back to 'Ready for testing'");
-            _item.ItemState = new ReadyForTestingItemState(_item);
-        }
-        public void Approve()
-        {
-            bool done = true;         
-            if(_item.Activities != null)
+            if (_item.Sprint.State is InProgressSprintState)
             {
-                foreach (Activity activity in _item.Activities)
-                {
-                    if (!activity.IsDone)
-                    {
-                        done = false;
-                    }
-                }
-            }
-            if(done)
-            {
-                Console.WriteLine("Moving item to 'Done'");
-                _item.ItemState = new DoneItemState(_item);
+                Console.WriteLine("Moving item back to 'Ready for testing'");
+                _item.ItemState = new ReadyForTestingItemState(_item);
             }
             else
             {
-                Console.WriteLine("State transition not allowed; Not all activities are done");
+                Console.WriteLine("State transition not allowed; Sprint is not in progress");
             }
-
+        }
+        public void Approve()
+        {
+            if (_item.Sprint.State is InProgressSprintState)
+            {
+                bool done = true;
+                if (_item.Activities != null)
+                {
+                    foreach (Activity activity in _item.Activities)
+                    {
+                        if (!activity.IsDone)
+                        {
+                            done = false;
+                        }
+                    }
+                }
+                if (done)
+                {
+                    Console.WriteLine("Moving item to 'Done'");
+                    _item.ItemState = new DoneItemState(_item);
+                }
+                else
+                {
+                    Console.WriteLine("State transition not allowed; Not all activities are done");
+                }
+            }
+            else
+            {
+                Console.WriteLine("State transition not allowed; Sprint is not in progress");
+            }
         }
     }
 }

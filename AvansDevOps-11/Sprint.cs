@@ -30,14 +30,16 @@ namespace AvansDevOps_11
         public Document? ReviewSummary { get; set; }
 
         public NotificationEvent NotificationEvent { get; set; }
-        private ReportBuilder _reportBuilder;
 
 
-        public Sprint(Project project, ScrumMaster scrumMaster)
+        public Sprint(Project project, ScrumMaster scrumMaster, string name, DateTime startDate, DateTime endDate)
         {
             Project = project;
             ScrumMaster = scrumMaster;
             State = new CreatedSprintState(this);
+            _name = name;
+            _startDate = startDate;
+            _endDate = endDate;
 
             NotificationEvent = new NotificationEvent();
             NotificationEvent.Subscribe(new SlackAdapter());
@@ -118,6 +120,19 @@ namespace AvansDevOps_11
                 totalStoryPoints += backlogItem.StoryPoints;
             }
             return totalStoryPoints;
+        }
+
+        public ReportBuilder? CreateReportBuilder()
+        {
+            if (this.State is ClosedSprintState)
+            {
+                return new ReportBuilder(this);
+            }
+            else
+            {
+                Console.WriteLine("Can not create report when sprint is not closed.");
+                return null;
+            }
         }
     }
 }

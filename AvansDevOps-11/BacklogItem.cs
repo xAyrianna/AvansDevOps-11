@@ -61,7 +61,19 @@ namespace AvansDevOps_11
 
         public void CreateThread(User user, string subject, string? description = null)
         {
-            Threads.Add(subject, new Thread(this, user, subject, description));
+            if (Sprint.State is InProgressSprintState)
+            {
+                if (this.ItemState is DoneItemState)
+                {
+                    Console.WriteLine("Cannot create thread for item in sprint; Item is already done.");
+                    return;
+                }
+                Threads.Add(subject, new Thread(this, user, subject, description));
+            }
+            else
+            {
+                Console.WriteLine("Cannot create thread for item in sprint; Sprint is not in progress.");
+            }
         }
 
         public void DeleteThread(string subject)

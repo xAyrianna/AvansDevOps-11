@@ -1,4 +1,6 @@
 
+using AvansDevOps_11.States.SprintStates;
+
 namespace AvansDevOps_11.States.ItemStates
 {
     public class DoingItemState : IItemState
@@ -16,8 +18,15 @@ namespace AvansDevOps_11.States.ItemStates
         }
         public void Finish()
         {
-            Console.WriteLine("Moving item to 'Ready for testing''");
-            _item.ItemState = new ReadyForTestingItemState(_item);
+            if (_item.Sprint.State is InProgressSprintState)
+            {
+                Console.WriteLine("Moving item to 'Ready for testing''");
+                _item.ItemState = new ReadyForTestingItemState(_item);
+            }
+            else
+            {
+                Console.WriteLine("State transition not allowed; Sprint is not in progress");
+            }
         }
         public void Test()
         {
