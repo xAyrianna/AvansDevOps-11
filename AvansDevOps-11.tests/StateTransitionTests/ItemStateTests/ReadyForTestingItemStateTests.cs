@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AvansDevOps_11.States.ItemStates;
+using AvansDevOps_11.States.SprintStates;
 using AvansDevOps_11.Users;
 using Xunit;
 
@@ -14,7 +15,7 @@ namespace AvansDevOps_11.tests.StateTransitionTests.ItemStateTests
 
         public ReadyForTestingItemStateTests()
         {
-            _item = new BacklogItem(new ReviewSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe")), new Developer("Joey Doe", "Joey Doe"), "Test item", "Test description", 6);
+            _item = new BacklogItem(new ReviewSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3)), new Developer("Joey Doe", "Joey Doe"), "Test item", "Test description", 6);
         }
 
         [Fact]
@@ -44,16 +45,31 @@ namespace AvansDevOps_11.tests.StateTransitionTests.ItemStateTests
         }
 
         [Fact]
-        public void TestItem_In_ReadyForTesting()
+        public void TestItem_In_ReadyForTesting_When_Sprint_InProgress()
         {
             // Arrange
             _item.ItemState = new ReadyForTestingItemState(_item);
+            _item.Sprint.State = new InProgressSprintState(_item.Sprint);
 
             // Act
             _item.ItemState.Test();
 
             // Assert
             Assert.IsType<TestingItemState>(_item.ItemState);
+        }
+
+        [Fact]
+        public void TestItem_In_ReadyForTesting_When_Sprint_Not_InProgress()
+        {
+            // Arrange
+            _item.ItemState = new ReadyForTestingItemState(_item);
+            _item.Sprint.State = new FinishedSprintState(_item.Sprint);
+
+            // Act
+            _item.ItemState.Test();
+
+            // Assert
+            Assert.IsType<ReadyForTestingItemState>(_item.ItemState);
         }
 
         [Fact]

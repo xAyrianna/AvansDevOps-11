@@ -10,7 +10,7 @@ namespace AvansDevOps_11.tests.CRUDTests
     public class ThreadTests
     {
         private Developer _developer = new Developer("John Doe", "John Doe");
-        private BacklogItem _backlogItem = new BacklogItem(new ReviewSprint(new Project("Test project", new ProductOwner("Jane Doe", "Jane Doe")), new ScrumMaster("Jane Doe", "Jane Doe")), new Developer("Joey Doe", "Joey Doe"), "Test item", "Test description", 6);
+        private BacklogItem _backlogItem = new BacklogItem(new ReviewSprint(new Project("Test project", new ProductOwner("Jane Doe", "Jane Doe")), new ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3)), new Developer("Joey Doe", "Joey Doe"), "Test item", "Test description", 6);
 
         [Fact]
         public void Assert_ThreadOwner_Gets_Added_To_UsersInThread_When_Creating_Thread()

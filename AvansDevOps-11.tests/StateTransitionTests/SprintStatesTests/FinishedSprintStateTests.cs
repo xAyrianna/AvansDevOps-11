@@ -14,7 +14,7 @@ namespace AvansDevOps_11.tests.StateTransitionTests.SprintStatesTests
 
         public FinishedSprintStateTests()
         {
-            _sprint = new ReviewSprint(new Project("Test project", new Users.ProductOwner("John Doe", "John Doe")), new Users.ScrumMaster("Jane Doe", "Jane Doe"));
+            _sprint = new ReviewSprint(new Project("Test project", new Users.ProductOwner("John Doe", "John Doe")), new Users.ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
         }
 
         [Fact]
@@ -87,7 +87,7 @@ namespace AvansDevOps_11.tests.StateTransitionTests.SprintStatesTests
         public void ApproveSprint_ForReleaseSprint_With_Deployment_Pipeline_In_FinishedState()
         {
             // Arrange
-            Sprint releaseSprint = new ReleaseSprint(new Project("Test project", new Users.ProductOwner("John Doe", "John Doe")), new Users.ScrumMaster("Jane Doe", "Jane Doe"));
+            Sprint releaseSprint = new ReleaseSprint(new Project("Test project", new Users.ProductOwner("John Doe", "John Doe")), new Users.ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
             releaseSprint.State = new FinishedSprintState(releaseSprint);
             releaseSprint.Pipeline = new Pipeline(releaseSprint);
             PipelineComposite pipelineComposite = new PipelineComposite(PipelineActionType.DEPLOY);
@@ -105,7 +105,7 @@ namespace AvansDevOps_11.tests.StateTransitionTests.SprintStatesTests
         public void ApproveSprint_ForReleaseSprint_Without_Deployment_Pipeline_In_FinishedState()
         {
             // Arrange
-            Sprint releaseSprint = new ReleaseSprint(new Project("Test project", new Users.ProductOwner("John Doe", "John Doe")), new Users.ScrumMaster("Jane Doe", "Jane Doe"));
+            Sprint releaseSprint = new ReleaseSprint(new Project("Test project", new Users.ProductOwner("John Doe", "John Doe")), new Users.ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
             releaseSprint.State = new FinishedSprintState(releaseSprint);
             releaseSprint.Pipeline = new Pipeline(releaseSprint);
             PipelineComposite pipelineComposite = new PipelineComposite(PipelineActionType.TEST);

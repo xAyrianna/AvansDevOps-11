@@ -17,7 +17,7 @@ namespace AvansDevOps_11.tests.CompositeVisitorTests
         public void Assert_PipelineActivity_Can_Be_Added()
         {
             // Arrange
-            Sprint sprint = new ReleaseSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"));
+            Sprint sprint = new ReleaseSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
             Pipeline pipeline = new Pipeline(sprint);
 
             // Act
@@ -31,7 +31,7 @@ namespace AvansDevOps_11.tests.CompositeVisitorTests
         public void Assert_PipelineActivity_Can_Be_Removed()
         {
             // Arrange
-            Sprint sprint = new ReleaseSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"));
+            Sprint sprint = new ReleaseSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
             Pipeline pipeline = new Pipeline(sprint);
             PipelineComposite pipelineActivity = new PipelineComposite(PipelineActionType.SOURCE);
             pipeline.AddActivity(pipelineActivity);
@@ -47,7 +47,7 @@ namespace AvansDevOps_11.tests.CompositeVisitorTests
         public void Assert_Pipeline_Is_Executed_When_Starting_Pipeline()
         {
             // Arrange
-            Sprint sprint = new ReleaseSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"));
+            Sprint sprint = new ReleaseSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
             Pipeline pipeline = new Pipeline(sprint);
             var mockActivity = new Mock<PipelineActivity>(PipelineActionType.UTILITY);
             var mockAction = new Mock<PipelineAction>("test", PipelineActionType.UTILITY);
@@ -66,7 +66,7 @@ namespace AvansDevOps_11.tests.CompositeVisitorTests
         public void Assert_Children_In_Pipeline_Are_Visited()
         {
             // Arrange
-            Sprint sprint = new ReleaseSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"));
+            Sprint sprint = new ReleaseSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
             Pipeline pipeline = new Pipeline(sprint);
             PipelineComposite pipelineComposite = new PipelineComposite(PipelineActionType.SOURCE);
             var compositeMock = new Mock<PipelineComposite>(PipelineActionType.SOURCE);

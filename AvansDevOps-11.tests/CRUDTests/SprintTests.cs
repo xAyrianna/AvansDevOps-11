@@ -20,7 +20,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_ReviewSprint_Needs_Review()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
 
             // Act
 
@@ -32,7 +32,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_ReleaseSprint_Has_Pipeline()
         {
             // Arrange
-            var sprint = new ReleaseSprint(project, scrumMaster);
+            var sprint = new ReleaseSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
 
             // Act
 
@@ -44,7 +44,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_Has_NotificationEvent()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
 
             // Act
 
@@ -56,7 +56,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_Has_Notification_Subscription()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
 
             // Act
 
@@ -68,7 +68,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Adding_NotificationStrategy()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
             var SMSAdapter = new SMSAdapter();
 
             // Act
@@ -82,7 +82,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Removing_NotificationStrategy()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
             var SMSAdapter = new SMSAdapter();
             sprint.AddNotificationStrategy(SMSAdapter);
 
@@ -97,7 +97,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_Is_In_CreatedState()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
 
             // Act
 
@@ -109,7 +109,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_Name_Can_Be_Changed_In_CreatedState()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
             sprint.State = new CreatedSprintState(sprint);
 
             // Act
@@ -123,7 +123,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_Name_Cannot_Be_Changed_When_Not_In_CreatedState()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
             sprint.State = new InProgressSprintState(sprint);
 
             // Act
@@ -137,7 +137,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_StartDate_Can_Be_Changed_In_CreatedState()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster)
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3))
             {
                 // Act
                 StartDate = time
@@ -151,7 +151,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_StartDate_Cannot_Be_Changed_When_Not_In_CreatedState()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
             sprint.State.Start();
 
             // Act
@@ -165,7 +165,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_EndDate_Can_Be_Changed_In_CreatedState()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
 
             // Act
             sprint.EndDate = time;
@@ -178,7 +178,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_EndDate_Cannot_Be_Changed_When_Not_In_CreatedState()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
             sprint.State = new InProgressSprintState(sprint);
 
             // Act
@@ -192,7 +192,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_Can_Add_Developer()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
             var developer = new Developer("Joey Doe", "Joey Doe");
 
             // Act
@@ -206,7 +206,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_Can_Remove_Developer()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
             var developer = new Developer("Joey Doe", "Joey Doe");
             sprint.Developers.Add(developer);
 
@@ -221,7 +221,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_Can_Add_Tester()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
             var tester = new Tester("Joey Doe", "Joey Doe");
 
             // Act
@@ -235,7 +235,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_Can_Remove_Tester()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
             var tester = new Tester("Joey Doe", "Joey Doe");
             sprint.Testers.Add(tester);
 
@@ -250,7 +250,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Uploading_ReviewSummary_Changes_State_When_Review_Needed_And_Sprint_InReview()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
             sprint.State = new InReviewSprintState(sprint);
 
             // Act
@@ -265,7 +265,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Uploading_ReviewSummary_Does_Not_Change_State_When_Review_Needed_And_Sprint_Not_InReview()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
             sprint.State = new CreatedSprintState(sprint);
 
             // Act
@@ -280,7 +280,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_Can_Add_BacklogItem_When_In_CreatedState()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
             sprint.State = new CreatedSprintState(sprint);
             var backlogItem = new BacklogItem(sprint,new Developer("Joey Doe", "Joey Doe"), "Test", "Test", 6);
 
@@ -295,7 +295,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_Cannot_Add_BacklogItem_When_Not_In_CreatedState()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
             sprint.State = new InProgressSprintState(sprint);
             var backlogItem = new BacklogItem(sprint, new Developer("Joey Doe", "Joey Doe"), "Test", "Test", 6);
 
@@ -310,7 +310,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_Can_Remove_BacklogItem_When_In_CreatedState()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
             sprint.State = new CreatedSprintState(sprint);
             var backlogItem = new BacklogItem(sprint, new Developer("Joey Doe", "Joey Doe"), "Test", "Test", 6);
             sprint.BacklogItems.Add(backlogItem);
@@ -326,7 +326,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_Cannot_Remove_BacklogItem_When_Not_In_CreatedState()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
             sprint.State = new InProgressSprintState(sprint);
             var backlogItem = new BacklogItem(sprint, new Developer("Joey Doe", "Joey Doe"), "Test", "Test", 6);
             sprint.BacklogItems.Add(backlogItem);
@@ -342,7 +342,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_Sprint_Can_Get_Total_StoryPoints()
         {
             // Arrange
-            var sprint = new ReviewSprint(project, scrumMaster);
+            var sprint = new ReviewSprint(project, scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
             sprint.State = new CreatedSprintState(sprint);
             var backlogItem = new BacklogItem(sprint, new Developer("Joey Doe", "Joey Doe"), "Test", "Test", 6);
             var backlogItem2 = new BacklogItem(sprint, new Developer("Joey Doe", "Joey Doe"), "Test", "Test", 4);

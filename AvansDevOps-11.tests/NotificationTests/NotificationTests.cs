@@ -19,7 +19,7 @@ namespace AvansDevOps_11.tests.NotificationTests
         public void Assert_NotificationEvent_Is_Created_For_Sprint()
         {
             // Arrange
-            Sprint sprint = new ReleaseSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"));
+            Sprint sprint = new ReleaseSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
 
             // Act
 
@@ -32,7 +32,7 @@ namespace AvansDevOps_11.tests.NotificationTests
         public void Assert_NotificationEvent_Can_Add_Strategy()
         {
             // Arrange
-            Sprint sprint = new ReleaseSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"));
+            Sprint sprint = new ReleaseSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
             INotificationAdapter strategy = new EmailAdapter();
 
             // Act
@@ -46,7 +46,7 @@ namespace AvansDevOps_11.tests.NotificationTests
         public void Assert_NotificationEvent_Can_Remove_Strategy()
         {
             // Arrange
-            Sprint sprint = new ReleaseSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"));
+            Sprint sprint = new ReleaseSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
             INotificationAdapter strategy = new EmailAdapter();
             sprint.AddNotificationStrategy(strategy);
 
@@ -63,7 +63,7 @@ namespace AvansDevOps_11.tests.NotificationTests
             ProductOwner productOwner = new ProductOwner("John Doe", "John Doe");
             ScrumMaster scrumMaster = new ScrumMaster("Jane Doe", "Jane Doe");
             // Arrange
-            Sprint sprint = new ReleaseSprint(new Project("Test project", productOwner), scrumMaster);
+            Sprint sprint = new ReleaseSprint(new Project("Test project", productOwner), scrumMaster, "Sprint name", new DateTime(), new DateTime().AddDays(3));
             var mockStrategy = new Mock<INotificationAdapter>();
             sprint.AddNotificationStrategy(mockStrategy.Object);
             
@@ -80,7 +80,7 @@ namespace AvansDevOps_11.tests.NotificationTests
         public void Assert_Notification_Sent_When_Sprint_Is_Canceled()
         {
             // Arrange
-            Sprint sprint = new ReviewSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"));
+            Sprint sprint = new ReviewSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
             Developer developer = new Developer("Joey Doe", "Joey Doe");
 
             var mockStrategy = new Mock<INotificationAdapter>();
@@ -99,7 +99,7 @@ namespace AvansDevOps_11.tests.NotificationTests
         public void Assert_Notification_Sent_When_Sprint_Is_Closed()
         {
             // Arrange
-            Sprint sprint = new ReviewSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"));
+            Sprint sprint = new ReviewSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
             Developer developer = new Developer("Joey Doe", "Joey Doe");
 
             var mockStrategy = new Mock<INotificationAdapter>();
@@ -118,7 +118,7 @@ namespace AvansDevOps_11.tests.NotificationTests
         public void Assert_Notifcation_Sent_When_Pipeline_Has_An_Error()
         {
             // Arrange
-            Sprint sprint = new ReviewSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"));
+            Sprint sprint = new ReviewSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
             Developer developer = new Developer("Joey Doe", "Joey Doe");
 
             var mockStrategy = new Mock<INotificationAdapter>();
@@ -139,7 +139,7 @@ namespace AvansDevOps_11.tests.NotificationTests
         public void Assert_Notification_Sent_When_BacklogItem_Ready_For_Testing()
         {
             // Arrange
-            Sprint sprint = new ReviewSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"));
+            Sprint sprint = new ReviewSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
             sprint.AddTester(new Tester("Jay Doe", "Jay Doe"));
             sprint.AddTester(new Tester("Jill Doe", "Jill Doe"));   
             Developer developer = new Developer("Joey Doe", "Joey Doe");
@@ -160,7 +160,7 @@ namespace AvansDevOps_11.tests.NotificationTests
         public void Assert_Notification_Sent_When_BacklogItem_Moves_Back_To_ToDo()
         {
             // Arrange
-            Sprint sprint = new ReviewSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"));
+            Sprint sprint = new ReviewSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
             Developer developer = new Developer("Joey Doe", "Joey Doe");
 
             var mockStrategy = new Mock<INotificationAdapter>();
@@ -170,6 +170,8 @@ namespace AvansDevOps_11.tests.NotificationTests
             List<User> toBeNotified = new List<User> { sprint.ScrumMaster };
 
             backlogItem.ItemState = new TestingItemState(backlogItem);
+
+            sprint.State = new InProgressSprintState(sprint);
 
             // Act
             backlogItem.ItemState.Redo();

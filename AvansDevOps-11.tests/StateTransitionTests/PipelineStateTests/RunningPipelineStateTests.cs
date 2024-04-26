@@ -14,7 +14,7 @@ namespace AvansDevOps_11.tests.StateTransitionTests.PipelineStateTests
 
         public RunningPipelineStateTests()
         {
-            _pipeline = new Pipeline(new ReleaseSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe")));
+            _pipeline = new Pipeline(new ReleaseSprint(new Project("Test project", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3)));
         }
 
         [Fact]

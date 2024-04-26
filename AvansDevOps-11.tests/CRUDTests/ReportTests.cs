@@ -12,7 +12,7 @@ namespace AvansDevOps_11.tests.CRUDTests
 {
     public class ReportTests
     {
-        private Sprint _sprint = new ReleaseSprint(new Project("Project", new ProductOwner("Product Owner", "PO")), new ScrumMaster("Scrum Master", "SM"));
+        private Sprint _sprint = new ReleaseSprint(new Project("Project", new ProductOwner("Product Owner", "PO")), new ScrumMaster("Scrum Master", "SM"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
         private Mock<IExportStrategy> mockExportStrategy = new Mock<IExportStrategy>();
 
         [Fact]
@@ -68,6 +68,7 @@ namespace AvansDevOps_11.tests.CRUDTests
             Assert.Contains("Scrum Master", report.ReportText);
         }
 
+        [Fact]
         public void Assert_Team_Is_Added_To_Report_With_Developers_And_Testers()
         {
             // Arrange

@@ -12,7 +12,7 @@ namespace AvansDevOps_11.tests.CRUDTests
     public class BacklogItemTests
     {
         private Developer developer = new Developer("Joe Doe", "Joe Doe");
-        private Sprint sprint = new ReviewSprint(new Project("TestProject", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"));
+        private Sprint sprint = new ReviewSprint(new Project("TestProject", new ProductOwner("John Doe", "John Doe")), new ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
 
         [Fact]
         public void Assert_Item_Is_In_ToDoItemState()
@@ -38,6 +38,7 @@ namespace AvansDevOps_11.tests.CRUDTests
             backlogItem.AddActivity(activity);
 
             // Assert
+            Assert.NotNull(backlogItem.Activities);
             Assert.Contains(activity, backlogItem.Activities);
         }
 
@@ -69,6 +70,7 @@ namespace AvansDevOps_11.tests.CRUDTests
             backlogItem.RemoveActivity(activity);
 
             // Assert
+            Assert.NotNull(backlogItem.Activities);
             Assert.DoesNotContain(activity, backlogItem.Activities);
         }
 
@@ -85,21 +87,36 @@ namespace AvansDevOps_11.tests.CRUDTests
             backlogItem.RemoveActivity(activity);
 
             // Assert
+            Assert.NotNull(backlogItem.Activities);
             Assert.Contains(activity, backlogItem.Activities);
         }
 
         [Fact]
-        public void Assert_Item_Can_Create_Thread()
+        public void Assert_Item_Can_Create_Thread_When_Sprint_InProgress()
         {
             // Arrange
             var backlogItem = new BacklogItem(sprint, developer, "Test", "Test", 5);
-
+            sprint.State = new InProgressSprintState(sprint);
 
             // Act
             backlogItem.CreateThread(developer, "Test");
 
             // Assert
             Assert.True(backlogItem.Threads.Any());
+        }
+
+        [Fact]
+        public void Assert_Item_Cannot_Create_Thread_When_Sprint_Not_InProgress()
+        {
+            // Arrange
+            var backlogItem = new BacklogItem(sprint, developer, "Test", "Test", 5);
+            sprint.State = new FinishedSprintState(sprint);
+
+            // Act
+            backlogItem.CreateThread(developer, "Test");
+
+            // Assert
+            Assert.True(backlogItem.Threads.Count == 0);
         }
 
         [Fact]

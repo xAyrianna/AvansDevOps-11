@@ -13,7 +13,7 @@ namespace AvansDevOps_11.tests.StateTransitionTests.SprintStatesTests
 
         public ClosedSprintStateTests()
         {
-            _sprint = new ReleaseSprint(new Project("Test project", new Users.ProductOwner("John Doe", "John Doe")), new Users.ScrumMaster("Jane Doe", "Jane Doe"));
+            _sprint = new ReleaseSprint(new Project("Test project", new Users.ProductOwner("John Doe", "John Doe")), new Users.ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
         }
 
         [Fact]

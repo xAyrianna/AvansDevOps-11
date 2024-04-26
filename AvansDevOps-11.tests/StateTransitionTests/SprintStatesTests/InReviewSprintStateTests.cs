@@ -14,7 +14,7 @@ namespace AvansDevOps_11.tests.StateTransitionTests.SprintStatesTests
 
         public InReviewSprintStateTests()
         {
-            _sprint = new ReviewSprint(new Project("Test project", new Users.ProductOwner("John Doe", "John Doe")), new Users.ScrumMaster("Jane Doe", "Jane Doe"));
+            _sprint = new ReviewSprint(new Project("Test project", new Users.ProductOwner("John Doe", "John Doe")), new Users.ScrumMaster("Jane Doe", "Jane Doe"), "Sprint name", new DateTime(), new DateTime().AddDays(3));
         }
 
         [Fact]
