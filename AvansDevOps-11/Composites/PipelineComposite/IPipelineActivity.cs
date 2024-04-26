@@ -9,7 +9,7 @@ namespace AvansDevOps_11.Composites.PipelineComposite
     public abstract class PipelineActivity
     {
         public PipelineActionType ActionType { get; set; }
-        public PipelineActivity(PipelineActionType actionType)
+        protected PipelineActivity(PipelineActionType actionType)
         {
             ActionType = actionType;
         }

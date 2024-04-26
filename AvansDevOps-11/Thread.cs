@@ -14,7 +14,7 @@ namespace AvansDevOps_11
         public bool IsClosed { get; set; } = false;
         public HashSet<User> UsersInThread = new();
         public List<ThreadReaction> Reactions = new();
-        BacklogItem BacklogItem;
+        private readonly BacklogItem BacklogItem;
 
         public Thread(BacklogItem backlogItem, User user, string subject, string? description = null)
         {

@@ -8,7 +8,7 @@ namespace AvansDevOps_11.Composites.PipelineComposite
 {
     public class PipelineComposite : PipelineActivity
     {
-        private List<PipelineActivity> Children = new List<PipelineActivity>();
+        private readonly List<PipelineActivity> Children = new List<PipelineActivity>();
 
         public PipelineComposite(PipelineActionType actionType): base(actionType)
         {

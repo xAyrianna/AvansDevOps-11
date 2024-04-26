@@ -6,7 +6,7 @@ namespace AvansDevOps_11.States.ItemStates
 {
     public class ReadyForTestingItemState : IItemState
     {
-        private BacklogItem _item;
+        private readonly BacklogItem _item;
 
         public ReadyForTestingItemState(BacklogItem item)
         {

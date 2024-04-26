@@ -4,7 +4,7 @@ namespace AvansDevOps_11.States.SprintStates
 {
     public class RunningPipelineSprintState : ISprintState
     {
-        private Sprint _sprint;
+        private readonly Sprint _sprint;
         public RunningPipelineSprintState(Sprint sprint)
         {
             _sprint = sprint;

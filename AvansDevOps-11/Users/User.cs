@@ -13,7 +13,7 @@ namespace AvansDevOps_11.Users
         public string? Email { get; set; }
 
 
-        public User(string name, string slackUsername)
+        protected User(string name, string slackUsername)
         {
             Name = name;
             SlackUsername = slackUsername;

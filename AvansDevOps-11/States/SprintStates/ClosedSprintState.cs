@@ -9,16 +9,14 @@ namespace AvansDevOps_11.States.SprintStates
 {
     public class ClosedSprintState : ISprintState
     {
-        private Sprint _sprint;
         public ClosedSprintState(Sprint sprint)
         {
-            _sprint = sprint;
             List<User> ToBeNotified = new List<User>()
             {
-                _sprint.ScrumMaster,
-                _sprint.Project.ProductOwner
+                sprint.ScrumMaster,
+                sprint.Project.ProductOwner
             };
-            _sprint.NotificationEvent.Notify(ToBeNotified, $"Sprint has been finished and closed", "Sprint Closed");
+            sprint.NotificationEvent.Notify(ToBeNotified, $"Sprint has been finished and closed", "Sprint Closed");
         }
         public void Start()
         {

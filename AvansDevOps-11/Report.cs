@@ -9,7 +9,7 @@ namespace AvansDevOps_11
 {
     public class Report
     {
-        public HashSet<IExportStrategy> ExportFormats = new();
+        public HashSet<IExportStrategy> ExportFormats;
         public string ReportText { get; set; }
 
         public Report(string report, HashSet<IExportStrategy> exportFormats)

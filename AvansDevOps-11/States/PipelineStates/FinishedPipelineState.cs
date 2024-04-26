@@ -8,12 +8,10 @@ namespace AvansDevOps_11.States.PipelineStates
 {
     public class FinishedPipelineState : IPipelineState
     {
-        private Pipeline _pipeline;
 
         public FinishedPipelineState(Pipeline pipeline)
         {
-            _pipeline = pipeline;
-            _pipeline.Sprint.State.FinishPipeline();
+            pipeline.Sprint.State.FinishPipeline();
         }
 
         public void Start()

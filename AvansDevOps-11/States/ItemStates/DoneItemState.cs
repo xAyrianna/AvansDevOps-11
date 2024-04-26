@@ -4,7 +4,7 @@ namespace AvansDevOps_11.States.ItemStates
 {
     public class DoneItemState : IItemState
     {
-        private BacklogItem _item;
+        private readonly BacklogItem _item;
 
         public DoneItemState(BacklogItem item)
         {

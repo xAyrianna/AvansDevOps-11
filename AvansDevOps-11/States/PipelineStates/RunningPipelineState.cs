@@ -9,7 +9,7 @@ namespace AvansDevOps_11.States.PipelineStates
 {
     public class RunningPipelineState : IPipelineState
     {
-        private Pipeline _pipeline;
+        private readonly Pipeline _pipeline;
         public RunningPipelineState(Pipeline pipeline)
         {
             _pipeline = pipeline;

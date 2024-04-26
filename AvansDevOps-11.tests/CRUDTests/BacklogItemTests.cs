@@ -102,7 +102,7 @@ namespace AvansDevOps_11.tests.CRUDTests
             backlogItem.CreateThread(developer, "Test");
 
             // Assert
-            Assert.True(backlogItem.Threads.Any());
+            Assert.True(backlogItem.Threads.ContainsKey("Test"));
         }
 
         [Fact]
@@ -145,7 +145,7 @@ namespace AvansDevOps_11.tests.CRUDTests
             backlogItem.DeleteThread("Test");
 
             // Assert
-            Assert.False(backlogItem.Threads.Any());
+            Assert.True(backlogItem.Threads.Count == 0);
         }
 
         [Fact]

@@ -7,7 +7,7 @@ namespace AvansDevOps_11.States.SprintStates
 {
     public class CreatedSprintState : ISprintState
     {
-        private Sprint _sprint;
+        private readonly Sprint _sprint;
         public CreatedSprintState(Sprint sprint)
         {
             _sprint = sprint;

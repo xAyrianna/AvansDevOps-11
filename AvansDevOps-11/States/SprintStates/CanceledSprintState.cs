@@ -8,16 +8,14 @@ namespace AvansDevOps_11.States.SprintStates
 {
     public class CanceledSprintState : ISprintState
     {
-        private Sprint _sprint;
         public CanceledSprintState(Sprint sprint, string reason)
         {
-            _sprint = sprint;
             List<User> ToBeNotified = new List<User>()
             {
-                _sprint.ScrumMaster,
-                _sprint.Project.ProductOwner
+                sprint.ScrumMaster,
+                sprint.Project.ProductOwner
             };
-            _sprint.NotificationEvent.Notify(ToBeNotified, $"{reason} \nSprint has been canceled.", "Sprint Canceled");
+            sprint.NotificationEvent.Notify(ToBeNotified, $"{reason} \nSprint has been canceled.", "Sprint Canceled");
         }
 
         public void Start()

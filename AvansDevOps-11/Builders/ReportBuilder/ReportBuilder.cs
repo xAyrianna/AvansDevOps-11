@@ -10,12 +10,12 @@ namespace AvansDevOps_11.Builders.ReportBuilder
 {
     public class ReportBuilder
     {
-        private Sprint _sprint;
+        private readonly Sprint _sprint;
         private string? _header;
         private string? _footer;
         private string? _team;
         private string? _currentProgress;
-        private HashSet<IExportStrategy> _exportFormats = new();
+        private readonly HashSet<IExportStrategy> _exportFormats = new();
 
         public ReportBuilder(Sprint sprint)
         {

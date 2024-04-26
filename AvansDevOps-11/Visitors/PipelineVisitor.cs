@@ -10,6 +10,6 @@ namespace AvansDevOps_11.Visitors
     {
         public abstract void Visit(Pipeline pipeline);
         public abstract void Visit(PipelineComposite composite);
-        public abstract void Visit(PipelineAction command);
+        public abstract void Visit(PipelineAction action);
     }
 }

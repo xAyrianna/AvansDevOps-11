@@ -32,7 +32,7 @@ namespace AvansDevOps_11
         public NotificationEvent NotificationEvent { get; set; }
 
 
-        public Sprint(Project project, ScrumMaster scrumMaster, string name, DateTime startDate, DateTime endDate)
+        protected Sprint(Project project, ScrumMaster scrumMaster, string name, DateTime startDate, DateTime endDate)
         {
             Project = project;
             ScrumMaster = scrumMaster;
