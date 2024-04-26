@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using AvansDevOps_11.Adapters.NotificationAdapter;
 using AvansDevOps_11.States.SprintStates;
@@ -253,7 +254,7 @@ namespace AvansDevOps_11.tests.CRUDTests
             sprint.State = new InReviewSprintState(sprint);
 
             // Act
-            sprint.UploadReviewSummary();
+            sprint.UploadReviewSummary(new Document());
 
             // Assert
             Assert.NotNull(sprint.ReviewSummary);
@@ -268,7 +269,7 @@ namespace AvansDevOps_11.tests.CRUDTests
             sprint.State = new CreatedSprintState(sprint);
 
             // Act
-            sprint.UploadReviewSummary();
+            sprint.UploadReviewSummary(new Document());
 
             // Assert
             Assert.Null(sprint.ReviewSummary);
