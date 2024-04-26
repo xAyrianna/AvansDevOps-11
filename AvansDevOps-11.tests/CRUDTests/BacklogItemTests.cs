@@ -92,7 +92,7 @@ namespace AvansDevOps_11.tests.CRUDTests
         }
 
         [Fact]
-        public void Assert_Item_Can_Create_Thread_When_Sprint_InProgress()
+        public void Assert_Item_Can_Create_Thread_When_Sprint_InProgress_And_Item_Not_Done()
         {
             // Arrange
             var backlogItem = new BacklogItem(sprint, developer, "Test", "Test", 5);
@@ -103,6 +103,21 @@ namespace AvansDevOps_11.tests.CRUDTests
 
             // Assert
             Assert.True(backlogItem.Threads.Any());
+        }
+
+        [Fact]
+        public void Assert_Item_Cannot_Create_Thread_When_Sprint_InProgress_And_Item_Done()
+        {
+            // Arrange
+            var backlogItem = new BacklogItem(sprint, developer, "Test", "Test", 5);
+            backlogItem.ItemState = new DoneItemState(backlogItem);
+            sprint.State = new InProgressSprintState(sprint);
+
+            // Act
+            backlogItem.CreateThread(developer, "Test");
+
+            // Assert
+            Assert.Empty(backlogItem.Threads);
         }
 
         [Fact]
@@ -127,7 +142,7 @@ namespace AvansDevOps_11.tests.CRUDTests
             backlogItem.CreateThread(developer, "Test");
 
             // Act
-            backlogItem.Threads.Remove("Test");
+            backlogItem.DeleteThread("Test");
 
             // Assert
             Assert.False(backlogItem.Threads.Any());

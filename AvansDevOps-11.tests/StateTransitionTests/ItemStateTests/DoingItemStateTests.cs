@@ -45,6 +45,7 @@ namespace AvansDevOps_11.tests.StateTransitionTests.ItemStateTests
             Assert.IsType<ReadyForTestingItemState>(_item.ItemState);
         }
 
+        [Fact]
         public void FinishItem_In_DoingState_When_Sprint_Not_InProgress()
         {
             // Arrange
