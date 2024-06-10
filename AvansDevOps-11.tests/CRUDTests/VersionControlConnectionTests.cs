@@ -13,9 +13,9 @@ namespace AvansDevOps_11.tests.CRUDTests
         public void Assert_VersionControlConnection_Is_Created()
         {
             // Arrange
-            var versionControlConnection = new VersionControlConnection("link", VersionControlConcept.COMMIT);
 
             // Act
+            var versionControlConnection = new VersionControlConnection("link", VersionControlConcept.COMMIT);
 
             //Assert
             Assert.NotNull(versionControlConnection);
