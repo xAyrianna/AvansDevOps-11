@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using AvansDevOps_11.Users;
 
 namespace AvansDevOps_11.tests.CRUDTests
 {
@@ -38,7 +39,7 @@ namespace AvansDevOps_11.tests.CRUDTests
             // Arrange
 
             // Act
-            var scrumMaster = new ScrumMaster("Scrum Master");
+            var scrumMaster = new ScrumMaster("Scrum Master", "ScrumMaster");
 
             //Assert
             Assert.NotNull(scrumMaster);
@@ -50,7 +51,7 @@ namespace AvansDevOps_11.tests.CRUDTests
             // Arrange
 
             // Act
-            var productOwner = new ProductOwner("Product Owner");
+            var productOwner = new ProductOwner("Product Owner", "ProductOwner");
 
             //Assert
             Assert.NotNull(productOwner);
