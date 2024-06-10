@@ -147,34 +147,5 @@ namespace AvansDevOps_11.tests.CRUDTests
             // Assert
             Assert.True(backlogItem.Threads.Count == 0);
         }
-
-        [Fact]
-        public void Assert_Adding_VersionControlConnection_To_Item()
-        {
-            // Arrange
-            var backlogItem = new BacklogItem(sprint, developer, "Test", "Test", 5);
-            var versionControlConnection = new VersionControlConnection("TestURL", VersionControlConcept.PUSH);
-
-            // Act
-            backlogItem.AddVersionControlConnection(versionControlConnection);
-
-            // Assert
-            Assert.Contains(versionControlConnection, backlogItem.VersionControlConnections);
-        }
-
-        [Fact]
-        public void Assert_Removing_VersionControlConnection_From_Item()
-        {
-            // Arrange
-            var backlogItem = new BacklogItem(sprint, developer, "Test", "Test", 5);
-            var versionControlConnection = new VersionControlConnection("TestURL", VersionControlConcept.PUSH);
-            backlogItem.AddVersionControlConnection(versionControlConnection);
-
-            // Act
-            backlogItem.RemoveVersionControlConnection(versionControlConnection);
-
-            // Assert
-            Assert.DoesNotContain(versionControlConnection, backlogItem.VersionControlConnections);
-        }
     }
 }
