@@ -2,12 +2,13 @@ using AvansDevOps_11.Users;
 
 namespace AvansDevOps_11
 {
-    public class Activity : SCM
+    public class Activity
     {
         public Developer Developer;
         public string Title { get; set; }
         public string Description { get; set; }
         public bool IsDone { get; set; }
+        public VersionControlConnection? VersionControlConnection { get; set; }
 
         public Activity(Developer developer, string title, string description)
         {
@@ -22,7 +23,7 @@ namespace AvansDevOps_11
             IsDone = true;
         }
 
-        public void ReOpen() 
+        public void ReOpen()
         {
             IsDone = false;
         }

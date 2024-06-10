@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps_11
 {
-    public abstract class Sprint : SCM
+    public abstract class Sprint
     {
         public Project Project;
         private string _name;
@@ -28,8 +28,8 @@ namespace AvansDevOps_11
         public Pipeline? Pipeline { get; set; }
         public bool Review;
         public Document? ReviewSummary { get; set; }
-
         public NotificationEvent NotificationEvent { get; set; }
+        public VersionControlConnection? VersionControlConnection { get; set; }
 
 
         protected Sprint(Project project, ScrumMaster scrumMaster, string name, DateTime startDate, DateTime endDate)
